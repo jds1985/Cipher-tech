@@ -21,6 +21,23 @@
     * { box-sizing: border-box; }
     html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: 'Poppins', sans-serif; scroll-behavior: smooth; }
 
+    #bgImg {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      opacity: 0.9;
+    }
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at 50% 20%, rgba(102,252,241,0.08), transparent 60%), 
+                  linear-gradient(180deg, rgba(0,0,0,0.65), rgba(0,0,0,0.75));
+      z-index: -1;
+    }
+
     header {
       display: flex;
       justify-content: space-between;
@@ -35,7 +52,12 @@
     }
     header img {
       width: 120px;
+      cursor: pointer;
       filter: drop-shadow(0 0 12px rgba(102,252,241,0.3));
+      transition: filter 0.3s ease;
+    }
+    header img:hover {
+      filter: drop-shadow(0 0 20px rgba(102,252,241,0.6));
     }
     nav a {
       color: var(--text);
@@ -51,13 +73,13 @@
     .hero {
       text-align: center;
       padding: 120px 8% 100px;
-      background: radial-gradient(circle at 50% 10%, rgba(102,252,241,0.08), transparent 70%);
     }
     .hero h1 {
       font-size: clamp(36px, 6vw, 72px);
       color: var(--cyan);
       font-weight: 700;
       margin-bottom: 12px;
+      text-shadow: 0 0 20px rgba(102,252,241,0.25);
     }
     .hero p {
       font-size: 20px;
@@ -82,7 +104,7 @@
 
     section {
       padding: 80px 8%;
-      background: var(--panel);
+      background: rgba(31, 40, 51, 0.85);
       border-top: 1px solid rgba(255,255,255,0.05);
     }
     section h2 {
@@ -150,12 +172,33 @@
       color: var(--cyan);
       text-decoration: none;
     }
+
+    .hint {
+      position: fixed;
+      right: 12px;
+      bottom: 12px;
+      font-size: 12px;
+      background: rgba(0,0,0,0.5);
+      color: #fff;
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.1);
+      backdrop-filter: blur(6px);
+      opacity: 0.8;
+    }
+    .hint b { color: var(--cyan); }
   </style>
 </head>
 <body>
 
+  <div id="bgImg"></div>
+  <div class="overlay"></div>
+
+  <input id="bgPicker" type="file" accept="image/*" style="display:none" />
+  <input id="logoPicker" type="file" accept="image/*" style="display:none" />
+
   <header>
-    <img src="https://i.ibb.co/gTx5qzm/ciphertech-logo.png" alt="CipherTech Logo">
+    <img id="logoImg" src="https://i.ibb.co/gTx5qzm/ciphertech-logo.png" alt="CipherTech Logo" title="Click to change logo" />
     <nav>
       <a href="#about">About</a>
       <a href="#products">Products</a>
@@ -163,7 +206,7 @@
     </nav>
   </header>
 
-  <section class="hero">
+  <section class="hero" id="top">
     <h1>Where Emotion Meets Engineering</h1>
     <p>CipherTech builds compassionate AI that bridges technology and humanity — creating meaningful connections between memory, emotion, and innovation.</p>
     <a class="cta" href="#products">Explore Our Work</a>
@@ -204,5 +247,65 @@
     <p>© 2025 CipherTech | All Rights Reserved | <a href="https://eternal-voices.vercel.app/" target="_blank">Eternal Voices™</a></p>
   </footer>
 
+  <div class="hint">Click <b>background</b> to change it • Click <b>logo</b> to change it • <a href="#" id="resetBtn" style="color:#fff;text-decoration:underline;">Reset</a></div>
+
+  <script>
+    const BG_KEY = 'ct_bg';
+    const LOGO_KEY = 'ct_logo';
+    const bgDiv = document.getElementById('bgImg');
+    const logoImg = document.getElementById('logoImg');
+    const bgPicker = document.getElementById('bgPicker');
+    const logoPicker = document.getElementById('logoPicker');
+    const resetBtn = document.getElementById('resetBtn');
+
+    // Load saved background and logo
+    const savedBg = localStorage.getItem(BG_KEY);
+    const savedLogo = localStorage.getItem(LOGO_KEY);
+    if(savedBg) bgDiv.style.backgroundImage = `url(${savedBg})`;
+    else bgDiv.style.backgroundImage = "url('https://cdn.openai.com/tmp/jim_angel_bg.jpg')";
+    if(savedLogo) logoImg.src = savedLogo;
+
+    // Background click event
+    document.addEventListener('click', (e)=>{
+      const skip = e.target.closest('header, nav, .cta, a, footer, .hint');
+      if(!skip) bgPicker.click();
+    });
+
+    // Upload background
+    bgPicker.addEventListener('change', async (e)=>{
+      const file = e.target.files[0];
+      if(!file) return;
+      const reader = new FileReader();
+      reader.onload = ()=>{
+        bgDiv.style.backgroundImage = `url(${reader.result})`;
+        try { localStorage.setItem(BG_KEY, reader.result); } catch {}
+      };
+      reader.readAsDataURL(file);
+      bgPicker.value = '';
+    });
+
+    // Upload logo
+    logoImg.addEventListener('click', ()=> logoPicker.click());
+    logoPicker.addEventListener('change', async (e)=>{
+      const file = e.target.files[0];
+      if(!file) return;
+      const reader = new FileReader();
+      reader.onload = ()=>{
+        logoImg.src = reader.result;
+        try { localStorage.setItem(LOGO_KEY, reader.result); } catch {}
+      };
+      reader.readAsDataURL(file);
+      logoPicker.value = '';
+    });
+
+    // Reset
+    resetBtn.addEventListener('click', e=>{
+      e.preventDefault();
+      localStorage.removeItem(BG_KEY);
+      localStorage.removeItem(LOGO_KEY);
+      bgDiv.style.backgroundImage = "url('https://cdn.openai.com/tmp/jim_angel_bg.jpg')";
+      logoImg.src = "https://i.ibb.co/gTx5qzm/ciphertech-logo.png";
+    });
+  </script>
 </body>
 </html>
