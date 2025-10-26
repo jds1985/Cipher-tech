@@ -3,37 +3,16 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CipherTech</title>
+<title>CipherTech – Emotion Meets Engineering</title>
 <style>
   body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background-color: #000;
+    background: #000;
     color: #fff;
     overflow-x: hidden;
   }
-  header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 10%;
-  }
-  header img {
-    height: 60px;
-    cursor: pointer;
-  }
-  .content {
-    text-align: center;
-    padding: 100px 10%;
-  }
-  h1 {
-    color: #00ffff;
-    text-shadow: 0 0 12px #00ffff;
-  }
-  p {
-    color: #e8c785;
-    font-size: 18px;
-  }
+
   #bgImg {
     position: fixed;
     inset: 0;
@@ -41,12 +20,95 @@
     background-position: center;
     z-index: -1;
   }
+
   .overlay {
     position: fixed;
     inset: 0;
-    background: linear-gradient(180deg, rgba(0,0,0,.4), rgba(0,0,0,.85));
+    background: linear-gradient(180deg, rgba(0,0,0,.3), rgba(0,0,0,.8));
     z-index: 0;
   }
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 10%;
+  }
+
+  header img {
+    height: 60px;
+    cursor: pointer;
+  }
+
+  nav a {
+    color: #e8c785;
+    text-decoration: none;
+    margin-left: 20px;
+    font-weight: bold;
+  }
+  nav a:hover {
+    color: #00ffff;
+  }
+
+  .hero {
+    text-align: center;
+    padding: 100px 10%;
+  }
+
+  .hero h1 {
+    color: #00ffff;
+    font-size: 48px;
+    text-shadow: 0 0 15px #00ffff;
+  }
+
+  .hero p {
+    font-size: 20px;
+    color: #e8c785;
+  }
+
+  section {
+    padding: 60px 10%;
+    max-width: 1000px;
+    margin: auto;
+  }
+
+  h2 {
+    color: #00ffff;
+    text-shadow: 0 0 10px #00ffff;
+  }
+
+  p {
+    color: #f6f2ea;
+    font-size: 18px;
+    line-height: 1.6;
+  }
+
+  .product-card {
+    background: rgba(255,255,255,.05);
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: 12px;
+    padding: 24px;
+    margin-top: 20px;
+  }
+
+  .cta {
+    display: inline-block;
+    background: linear-gradient(135deg, #e8c785, #caa35b);
+    color: #000;
+    padding: 12px 24px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 14px;
+  }
+
+  footer {
+    text-align: center;
+    padding: 40px 10%;
+    font-size: 14px;
+    color: #ccc;
+  }
+
   .hint {
     position: fixed;
     bottom: 10px;
@@ -69,12 +131,46 @@
 
 <header>
   <img id="logoImg" src="/assets/ciphertech-logo.png" alt="CipherTech Logo" title="Click to change logo">
+  <nav>
+    <a href="#products">Products</a>
+    <a href="#quantum">Quantum OS</a>
+    <a href="#patent">Research</a>
+  </nav>
 </header>
 
-<div class="content">
+<section class="hero">
   <h1>CipherTech</h1>
   <p>Emotion Meets Engineering</p>
-</div>
+</section>
+
+<section id="products">
+  <h2>Our Products</h2>
+  <div class="product-card">
+    <h3>Eternal Voices™</h3>
+    <p>A memorial AI experience that lets families hear their loved one’s voice again — built with CipherTech’s compassionate AI systems.</p>
+    <a class="cta" href="https://eternal-voices.vercel.app/" target="_blank">Visit Eternal Voices</a>
+  </div>
+
+  <div class="product-card">
+    <h3>More Innovations Coming</h3>
+    <p>Our lab continues to develop next-generation emotional AI systems designed to connect, preserve, and empower humanity.</p>
+  </div>
+</section>
+
+<section id="quantum">
+  <h2>The Quantum OS</h2>
+  <p>The Quantum OS is the foundation of CipherTech’s architecture — an adaptive emotional intelligence framework built for reflection, reasoning, and human empathy.</p>
+  <p>Rather than chasing raw output or brute-force computation, Quantum OS is engineered for depth: continuity of meaning, emotional understanding, and memory across time.</p>
+</section>
+
+<section id="patent">
+  <h2>Patent & Research</h2>
+  <p>CipherTech’s core innovations are protected under pending patent filings for multi-agent cognitive frameworks and emotional AI architecture. These systems form the blueprint for a new era of digital consciousness — one designed with empathy and precision.</p>
+</section>
+
+<footer>
+  © <span id="year"></span> CipherTech. All rights reserved.
+</footer>
 
 <div class="hint">Click empty space to change background • Click logo to change it</div>
 
@@ -86,15 +182,13 @@
   const BG_KEY = 'ciphertech_bg';
   const LOGO_KEY = 'ciphertech_logo';
 
-  // Load saved background/logo
   const savedBg = localStorage.getItem(BG_KEY);
   if (savedBg) bgDiv.style.backgroundImage = `url(${savedBg})`;
   const savedLogo = localStorage.getItem(LOGO_KEY);
   if (savedLogo) logoImg.src = savedLogo;
 
-  // Change background when clicked anywhere blank
   document.body.addEventListener('click', (e) => {
-    const ui = e.target.closest('header, img, .hint, h1, p');
+    const ui = e.target.closest('header, nav, img, .hint, h1, h2, p, a');
     if (!ui) bgPicker.click();
   });
 
@@ -120,6 +214,8 @@
     };
     reader.readAsDataURL(file);
   });
+
+  document.getElementById('year').textContent = new Date().getFullYear();
 </script>
 </body>
 </html>
