@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CipherTech | Where Emotion Meets Engineering</title>
+  <meta name="description" content="CipherTech builds compassionate AI systems that bridge technology and emotion. Creators of Eternal Voices™ — AI-powered remembrance." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b0c10;
+      --panel: #1f2833;
+      --cyan: #66fcf1;
+      --cyan-deep: #45a29e;
+      --text: #e6e6e6;
+      --accent: #caa35b;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: 'Poppins', sans-serif; scroll-behavior: smooth; }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 8%;
+      background: rgba(15, 18, 22, 0.8);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(8px);
+    }
+    header img {
+      width: 120px;
+      filter: drop-shadow(0 0 12px rgba(102,252,241,0.3));
+    }
+    nav a {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+      margin-left: 24px;
+      transition: color 0.3s ease;
+    }
+    nav a:hover {
+      color: var(--cyan);
+    }
+
+    .hero {
+      text-align: center;
+      padding: 120px 8% 100px;
+      background: radial-gradient(circle at 50% 10%, rgba(102,252,241,0.08), transparent 70%);
+    }
+    .hero h1 {
+      font-size: clamp(36px, 6vw, 72px);
+      color: var(--cyan);
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .hero p {
+      font-size: 20px;
+      color: #c5c6c7;
+      max-width: 700px;
+      margin: 0 auto 30px;
+    }
+    .hero .cta {
+      display: inline-block;
+      background: linear-gradient(90deg, var(--cyan-deep), var(--cyan));
+      color: var(--bg);
+      padding: 14px 30px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 700;
+      transition: all 0.3s ease;
+    }
+    .hero .cta:hover {
+      transform: scale(1.05);
+      background: linear-gradient(90deg, var(--cyan), var(--cyan-deep));
+    }
+
+    section {
+      padding: 80px 8%;
+      background: var(--panel);
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+    section h2 {
+      text-align: center;
+      font-size: 2em;
+      color: var(--cyan);
+      margin-bottom: 30px;
+    }
+    .about p, .products p {
+      text-align: center;
+      line-height: 1.8;
+      max-width: 800px;
+      margin: 0 auto;
+      color: #c5c6c7;
+    }
+
+    .product-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      padding: 30px;
+      text-align: center;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 20px rgba(0,0,0,0.4);
+    }
+    .product-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 0 25px rgba(102,252,241,0.25);
+    }
+    .product-card h3 {
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+    .product-card p {
+      color: #d0d0d0;
+      font-size: 0.95em;
+      line-height: 1.6;
+    }
+    .product-card a {
+      color: var(--cyan);
+      text-decoration: none;
+      font-weight: bold;
+      display: inline-block;
+      margin-top: 14px;
+      transition: color 0.3s;
+    }
+    .product-card a:hover { color: var(--accent); }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      margin-top: 40px;
+    }
+
+    footer {
+      background: #11141b;
+      text-align: center;
+      padding: 30px 0;
+      font-size: 14px;
+      color: #888;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+    footer a {
+      color: var(--cyan);
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <img src="https://i.ibb.co/gTx5qzm/ciphertech-logo.png" alt="CipherTech Logo">
+    <nav>
+      <a href="#about">About</a>
+      <a href="#products">Products</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>Where Emotion Meets Engineering</h1>
+    <p>CipherTech builds compassionate AI that bridges technology and humanity — creating meaningful connections between memory, emotion, and innovation.</p>
+    <a class="cta" href="#products">Explore Our Work</a>
+  </section>
+
+  <section id="about" class="about">
+    <h2>About CipherTech</h2>
+    <p>
+      Founded to redefine the relationship between humans and machines, CipherTech develops intelligent systems designed with empathy.  
+      Our mission is to create technologies that honor emotion, preserve legacy, and bring comfort through digital connection.
+    </p>
+  </section>
+
+  <section id="products" class="products">
+    <h2>Our Innovations</h2>
+    <div class="product-grid">
+      <div class="product-card">
+        <h3>Eternal Voices™</h3>
+        <p>A first-of-its-kind memorial service that lets families hear their loved ones’ voices again, reconstructed with compassion and precision using secure AI technology.</p>
+        <a href="https://eternal-voices.vercel.app/" target="_blank" rel="noopener noreferrer">Visit Eternal Voices →</a>
+      </div>
+      <div class="product-card">
+        <h3>More Coming Soon</h3>
+        <p>We’re actively developing the next generation of emotional AI experiences — where memory, identity, and technology converge to create human-centered innovation.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <h2>Contact CipherTech</h2>
+    <p>
+      For partnerships, collaborations, or media inquiries, reach us at  
+      <a href="mailto:ciphertechai1@gmail.com">ciphertechai1@gmail.com</a>
+    </p>
+  </section>
+
+  <footer>
+    <p>© 2025 CipherTech | All Rights Reserved | <a href="https://eternal-voices.vercel.app/" target="_blank">Eternal Voices™</a></p>
+  </footer>
+
+</body>
+</html>
