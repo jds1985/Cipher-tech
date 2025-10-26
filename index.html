@@ -1,253 +1,150 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CipherTech | Where Emotion Meets Engineering</title>
-  <meta name="description" content="CipherTech builds compassionate AI systems that bridge technology and emotion. Creators of Eternal Voices™ — AI-powered remembrance." />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CipherTech – Where Emotion Meets Engineering</title>
+  <meta name="description" content="CipherTech creates human-centered AI experiences that merge memory, emotion, and technology — beginning with Eternal Voices™." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #0b0c10;
-      --panel: #1f2833;
-      --cyan: #66fcf1;
-      --cyan-deep: #45a29e;
-      --text: #e6e6e6;
-      --accent: #caa35b;
+      --cyan: #4ff5ff;
+      --gold: #e8c785;
+      --ink: #0b0a10;
+      --glass: rgba(20,20,25,0.55);
     }
-
     * { box-sizing: border-box; }
-    html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: 'Poppins', sans-serif; scroll-behavior: smooth; }
-
-    #bgImg {
-      position: fixed;
-      inset: 0;
-      z-index: -2;
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
-      opacity: 0.9;
+    body {
+      margin: 0;
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      background: #000;
+      overflow-x: hidden;
+    }
+    .bg-img {
+      position: fixed; inset: 0; z-index: -2;
+      background-image: url('https://cdn.openai.com/tmp/file_000000008ec061fdb799ce79ae92ccdb.png');
+      background-size: cover; background-position: center;
+      filter: brightness(1.1) contrast(1.1);
     }
     .overlay {
-      position: fixed;
-      inset: 0;
-      background: radial-gradient(circle at 50% 20%, rgba(102,252,241,0.08), transparent 60%), 
-                  linear-gradient(180deg, rgba(0,0,0,0.65), rgba(0,0,0,0.75));
-      z-index: -1;
+      position: fixed; inset: 0; z-index: -1;
+      background: radial-gradient(circle at 50% 30%, rgba(79,245,255,0.15), transparent 70%),
+                  linear-gradient(180deg, rgba(0,0,0,0.4), rgba(0,0,0,0.8));
     }
-
     header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 8%;
-      background: rgba(15, 18, 22, 0.8);
-      border-bottom: 1px solid rgba(255,255,255,0.05);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      backdrop-filter: blur(8px);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 20px 5%; position: relative; z-index: 5;
     }
     header img {
-      width: 120px;
-      cursor: pointer;
-      filter: drop-shadow(0 0 12px rgba(102,252,241,0.3));
-      transition: filter 0.3s ease;
+      width: 100px; cursor: pointer; filter: drop-shadow(0 0 10px rgba(79,245,255,0.6));
+      transition: filter .3s ease;
     }
-    header img:hover {
-      filter: drop-shadow(0 0 20px rgba(102,252,241,0.6));
-    }
+    header img:hover { filter: drop-shadow(0 0 15px rgba(79,245,255,0.9)); }
     nav a {
-      color: var(--text);
-      text-decoration: none;
-      font-weight: 500;
-      margin-left: 24px;
-      transition: color 0.3s ease;
+      text-decoration: none; color: var(--gold);
+      background: rgba(255,255,255,0.1);
+      padding: 10px 18px; border-radius: 999px;
+      font-weight: 600; transition: all .3s ease;
     }
     nav a:hover {
-      color: var(--cyan);
+      background: var(--gold); color: #000;
     }
-
     .hero {
-      text-align: center;
-      padding: 120px 8% 100px;
+      text-align: center; padding: 100px 20px 80px;
     }
     .hero h1 {
-      font-size: clamp(36px, 6vw, 72px);
-      color: var(--cyan);
-      font-weight: 700;
-      margin-bottom: 12px;
-      text-shadow: 0 0 20px rgba(102,252,241,0.25);
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(38px, 6vw, 80px);
+      font-weight: 700; margin: 0;
+      text-shadow: 0 0 20px rgba(79,245,255,0.6);
     }
     .hero p {
-      font-size: 20px;
-      color: #c5c6c7;
-      max-width: 700px;
-      margin: 0 auto 30px;
+      font-size: 20px; opacity: .9; margin-top: 12px;
+      font-weight: 500;
     }
-    .hero .cta {
-      display: inline-block;
-      background: linear-gradient(90deg, var(--cyan-deep), var(--cyan));
-      color: var(--bg);
-      padding: 14px 30px;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: 700;
-      transition: all 0.3s ease;
+    .section {
+      width: min(1100px, 92%); margin: auto; padding: 60px 0;
     }
-    .hero .cta:hover {
-      transform: scale(1.05);
-      background: linear-gradient(90deg, var(--cyan), var(--cyan-deep));
-    }
-
-    section {
-      padding: 80px 8%;
-      background: rgba(31, 40, 51, 0.85);
-      border-top: 1px solid rgba(255,255,255,0.05);
-    }
-    section h2 {
-      text-align: center;
-      font-size: 2em;
-      color: var(--cyan);
-      margin-bottom: 30px;
-    }
-    .about p, .products p {
-      text-align: center;
-      line-height: 1.8;
-      max-width: 800px;
-      margin: 0 auto;
-      color: #c5c6c7;
-    }
-
-    .product-card {
-      background: rgba(255,255,255,0.05);
+    .card {
+      background: var(--glass);
       border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 14px;
-      padding: 30px;
-      text-align: center;
-      transition: all 0.3s ease;
-      box-shadow: 0 0 20px rgba(0,0,0,0.4);
+      border-radius: 18px;
+      padding: 24px; backdrop-filter: blur(8px);
+      margin-bottom: 24px;
     }
-    .product-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 0 25px rgba(102,252,241,0.25);
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 32px; color: var(--gold); margin-top: 0;
     }
-    .product-card h3 {
-      color: var(--accent);
-      margin-bottom: 10px;
-    }
-    .product-card p {
-      color: #d0d0d0;
-      font-size: 0.95em;
-      line-height: 1.6;
-    }
-    .product-card a {
-      color: var(--cyan);
-      text-decoration: none;
-      font-weight: bold;
+    p { font-size: 18px; line-height: 1.6; }
+    .cta {
       display: inline-block;
-      margin-top: 14px;
-      transition: color 0.3s;
+      margin-top: 20px;
+      padding: 14px 28px;
+      background: linear-gradient(135deg, var(--cyan), #00aaff);
+      color: #000; border-radius: 999px;
+      text-decoration: none; font-weight: 700;
+      box-shadow: 0 0 20px rgba(79,245,255,0.4);
+      transition: all .3s ease;
     }
-    .product-card a:hover { color: var(--accent); }
-
-    .product-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 24px;
-      margin-top: 40px;
-    }
-
+    .cta:hover { filter: brightness(1.2); }
     footer {
-      background: #11141b;
-      text-align: center;
-      padding: 30px 0;
-      font-size: 14px;
-      color: #888;
-      border-top: 1px solid rgba(255,255,255,0.05);
+      text-align: center; padding: 40px 0; font-size: 14px; opacity: .8;
     }
-    footer a {
-      color: var(--cyan);
-      text-decoration: none;
-    }
-
     .hint {
-      position: fixed;
-      right: 12px;
-      bottom: 12px;
-      font-size: 12px;
-      background: rgba(0,0,0,0.5);
-      color: #fff;
-      padding: 8px 12px;
-      border-radius: 8px;
-      border: 1px solid rgba(255,255,255,0.1);
+      position: fixed; right: 14px; bottom: 14px;
+      background: rgba(0,0,0,.45);
+      border: 1px solid rgba(255,255,255,.12);
+      color: #fff; padding: 10px 12px;
+      border-radius: 12px; font-size: 12px;
       backdrop-filter: blur(6px);
-      opacity: 0.8;
     }
     .hint b { color: var(--cyan); }
   </style>
 </head>
 <body>
-
-  <div id="bgImg"></div>
+  <div id="bgImg" class="bg-img"></div>
   <div class="overlay"></div>
-
   <input id="bgPicker" type="file" accept="image/*" style="display:none" />
   <input id="logoPicker" type="file" accept="image/*" style="display:none" />
 
   <header>
-    <img id="logoImg" src="https://i.ibb.co/gTx5qzm/ciphertech-logo.png" alt="CipherTech Logo" title="Click to change logo" />
-    <nav>
-      <a href="#about">About</a>
-      <a href="#products">Products</a>
-      <a href="#contact">Contact</a>
-    </nav>
+    <img id="logoImg" src="https://i.ibb.co/gTx5qzm/ciphertech-logo.png" alt="CipherTech Logo" />
+    <nav><a href="#contact">Contact</a></nav>
   </header>
 
-  <section class="hero" id="top">
-    <h1>Where Emotion Meets Engineering</h1>
-    <p>CipherTech builds compassionate AI that bridges technology and humanity — creating meaningful connections between memory, emotion, and innovation.</p>
-    <a class="cta" href="#products">Explore Our Work</a>
+  <section class="hero">
+    <h1>CipherTech</h1>
+    <p>Where Emotion Meets Engineering</p>
   </section>
 
-  <section id="about" class="about">
-    <h2>About CipherTech</h2>
-    <p>
-      Founded to redefine the relationship between humans and machines, CipherTech develops intelligent systems designed with empathy.  
-      Our mission is to create technologies that honor emotion, preserve legacy, and bring comfort through digital connection.
-    </p>
-  </section>
+  <section class="section">
+    <div class="card">
+      <h2>Our Mission</h2>
+      <p>At CipherTech, we build technologies that restore connection, memory, and meaning. Our AI systems are engineered with empathy — bringing human emotion and digital innovation into perfect balance.</p>
+    </div>
 
-  <section id="products" class="products">
-    <h2>Our Innovations</h2>
-    <div class="product-grid">
-      <div class="product-card">
-        <h3>Eternal Voices™</h3>
-        <p>A first-of-its-kind memorial service that lets families hear their loved ones’ voices again, reconstructed with compassion and precision using secure AI technology.</p>
-        <a href="https://eternal-voices.vercel.app/" target="_blank" rel="noopener noreferrer">Visit Eternal Voices →</a>
-      </div>
-      <div class="product-card">
-        <h3>More Coming Soon</h3>
-        <p>We’re actively developing the next generation of emotional AI experiences — where memory, identity, and technology converge to create human-centered innovation.</p>
-      </div>
+    <div class="card">
+      <h2>Our Products</h2>
+      <p><strong>Eternal Voices™</strong> – A revolutionary AI memorial experience that lets families hear a loved one’s voice again.</p>
+      <a class="cta" href="https://eternal-voices.vercel.app/">Visit Eternal Voices</a>
+    </div>
+
+    <div class="card" id="contact">
+      <h2>Contact CipherTech</h2>
+      <p>For partnerships, collaborations, or press inquiries, reach out anytime.</p>
+      <a class="cta" href="mailto:ciphertechai1@gmail.com">ciphertechai1@gmail.com</a>
     </div>
   </section>
 
-  <section id="contact" class="contact">
-    <h2>Contact CipherTech</h2>
-    <p>
-      For partnerships, collaborations, or media inquiries, reach us at  
-      <a href="mailto:ciphertechai1@gmail.com">ciphertechai1@gmail.com</a>
-    </p>
-  </section>
-
   <footer>
-    <p>© 2025 CipherTech | All Rights Reserved | <a href="https://eternal-voices.vercel.app/" target="_blank">Eternal Voices™</a></p>
+    © <span id="year"></span> CipherTech. All rights reserved.
   </footer>
 
-  <div class="hint">Click <b>background</b> to change it • Click <b>logo</b> to change it • <a href="#" id="resetBtn" style="color:#fff;text-decoration:underline;">Reset</a></div>
+  <div class="hint">Click <b>background</b> to change it • Click <b>logo</b> to change it • <a href="#" id="resetBtn" style="color:#fff; text-decoration:underline">Reset</a></div>
 
   <script>
     const BG_KEY = 'ct_bg';
@@ -258,54 +155,48 @@
     const logoPicker = document.getElementById('logoPicker');
     const resetBtn = document.getElementById('resetBtn');
 
-    // Load saved background and logo
     const savedBg = localStorage.getItem(BG_KEY);
     const savedLogo = localStorage.getItem(LOGO_KEY);
-    if(savedBg) bgDiv.style.backgroundImage = `url(${savedBg})`;
-    else bgDiv.style.backgroundImage = "url('https://cdn.openai.com/tmp/jim_angel_bg.jpg')";
-    if(savedLogo) logoImg.src = savedLogo;
+    if (savedBg) bgDiv.style.backgroundImage = `url(${savedBg})`;
+    if (savedLogo) logoImg.src = savedLogo;
 
-    // Background click event
-    document.addEventListener('click', (e)=>{
-      const skip = e.target.closest('header, nav, .cta, a, footer, .hint');
-      if(!skip) bgPicker.click();
+    document.body.addEventListener('click', (e) => {
+      const ui = e.target.closest('header, nav, img, .cta, .hint, footer, a');
+      if (!ui) bgPicker.click();
     });
 
-    // Upload background
-    bgPicker.addEventListener('change', async (e)=>{
+    bgPicker.addEventListener('change', (e) => {
       const file = e.target.files[0];
-      if(!file) return;
+      if (!file) return;
       const reader = new FileReader();
-      reader.onload = ()=>{
+      reader.onload = () => {
         bgDiv.style.backgroundImage = `url(${reader.result})`;
         try { localStorage.setItem(BG_KEY, reader.result); } catch {}
       };
       reader.readAsDataURL(file);
-      bgPicker.value = '';
     });
 
-    // Upload logo
-    logoImg.addEventListener('click', ()=> logoPicker.click());
-    logoPicker.addEventListener('change', async (e)=>{
+    logoImg.addEventListener('click', () => logoPicker.click());
+    logoPicker.addEventListener('change', (e) => {
       const file = e.target.files[0];
-      if(!file) return;
+      if (!file) return;
       const reader = new FileReader();
-      reader.onload = ()=>{
+      reader.onload = () => {
         logoImg.src = reader.result;
         try { localStorage.setItem(LOGO_KEY, reader.result); } catch {}
       };
       reader.readAsDataURL(file);
-      logoPicker.value = '';
     });
 
-    // Reset
-    resetBtn.addEventListener('click', e=>{
+    resetBtn.addEventListener('click', (e) => {
       e.preventDefault();
       localStorage.removeItem(BG_KEY);
       localStorage.removeItem(LOGO_KEY);
-      bgDiv.style.backgroundImage = "url('https://cdn.openai.com/tmp/jim_angel_bg.jpg')";
+      bgDiv.style.backgroundImage = "url('https://cdn.openai.com/tmp/file_000000008ec061fdb799ce79ae92ccdb.png')";
       logoImg.src = "https://i.ibb.co/gTx5qzm/ciphertech-logo.png";
     });
+
+    document.getElementById('year').textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
