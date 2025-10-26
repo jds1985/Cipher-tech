@@ -94,7 +94,72 @@ footer{padding:60px 10%;text-align:center;font-size:14px;opacity:.8;}
     Rather than focusing on raw computational output, Quantum OS was engineered for depth — the ability to understand meaning, emotion, and continuity across time.
   </p>
 </section>
+<script>
+  const BG_KEY = 'ct_bg';
+  const LOGO_KEY = 'ct_logo';
+  const bgDiv = document.getElementById('bgImg');
+  const logoImg = document.getElementById('logoImg');
+  const bgPicker = document.getElementById('bgPicker');
+  const logoPicker = document.getElementById('logoPicker');
+  const resetBtn = document.getElementById('resetBtn');
 
+  // Load saved background and logo
+  const savedBg = localStorage.getItem(BG_KEY);
+  const savedLogo = localStorage.getItem(LOGO_KEY);
+  if (savedBg) {
+    bgDiv.style.backgroundImage = `url(${savedBg})`;
+  } else {
+    bgDiv.style.backgroundImage = 'none';
+  }
+  if (savedLogo) {
+    logoImg.src = savedLogo;
+  }
+
+  // Click anywhere outside UI elements to change background
+  document.body.addEventListener('click', (e) => {
+    const ui = e.target.closest('header, nav, img, .cta, .hint, footer, a');
+    if (!ui) bgPicker.click();
+  });
+
+  // When background is chosen
+  bgPicker.addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      const dataUrl = reader.result;
+      bgDiv.style.backgroundImage = `url(${dataUrl})`;
+      try { localStorage.setItem(BG_KEY, dataUrl); } catch {}
+    };
+    reader.readAsDataURL(file);
+  });
+
+  // Change logo on click
+  logoImg.addEventListener('click', () => logoPicker.click());
+  logoPicker.addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      const dataUrl = reader.result;
+      logoImg.src = dataUrl;
+      try { localStorage.setItem(LOGO_KEY, dataUrl); } catch {}
+    };
+    reader.readAsDataURL(file);
+  });
+
+  // Reset both
+  resetBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    localStorage.removeItem(BG_KEY);
+    localStorage.removeItem(LOGO_KEY);
+    bgDiv.style.backgroundImage = 'none';
+    logoImg.src = '/assets/ciphertech-logo.png';
+  });
+
+  // Footer year
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
 <section id="patent" class="patent-section">
   <h2>Patent & Research</h2>
   <p>
@@ -111,41 +176,7 @@ footer{padding:60px 10%;text-align:center;font-size:14px;opacity:.8;}
 <div class="hint">Click <b>background</b> to change it • Click <b>logo</b> to change it • <a href="#" id="resetBtn" style="color:#fff;text-decoration:underline">Reset</a></div>
 
 <script>
-const BG_KEY='ct_bg',LOGO_KEY='ct_logo';
-const bgDiv=document.getElementById('bgImg');
-const logoImg=document.getElementById('logoImg');
-const bgPicker=document.getElementById('bgPicker');
-const logoPicker=document.getElementById('logoPicker');
-const resetBtn=document.getElementById('resetBtn');
-const savedBg=localStorage.getItem(BG_KEY);
-const savedLogo=localStorage.getItem(LOGO_KEY);
-if(savedBg)bgDiv.style.backgroundImage=`url(${savedBg})`;
-if(savedLogo)logoImg.src=savedLogo;
-document.body.addEventListener('click',e=>{
-  const ui=e.target.closest('header,nav,img,.cta,.hint,footer,a');
-  if(!ui)bgPicker.click();
-});
-bgPicker.addEventListener('change',e=>{
-  const f=e.target.files[0];if(!f)return;
-  const r=new FileReader();
-  r.onload=()=>{bgDiv.style.backgroundImage=`url(${r.result})`;localStorage.setItem(BG_KEY,r.result);}
-  r.readAsDataURL(f);
-});
-logoImg.addEventListener('click',()=>logoPicker.click());
-logoPicker.addEventListener('change',e=>{
-  const f=e.target.files[0];if(!f)return;
-  const r=new FileReader();
-  r.onload=()=>{logoImg.src=r.result;localStorage.setItem(LOGO_KEY,r.result);}
-  r.readAsDataURL(f);
-});
-resetBtn.addEventListener('click',e=>{
-  e.preventDefault();
-  localStorage.removeItem(BG_KEY);
-  localStorage.removeItem(LOGO_KEY);
-  bgDiv.style.backgroundImage="url('https://cdn.openai.com/tmp/jim_circuit_bg.jpg')";
-  logoImg.src="/assets/ciphertech-logo.png";
-});
-document.getElementById('year').textContent=new Date().getFullYear();
+
 </script>
 </body>
 </html>
