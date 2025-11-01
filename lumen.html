@@ -30,6 +30,9 @@
     p{font-size:18px;line-height:1.6;}
     .cta{display:inline-block;margin-top:20px;padding:14px 28px;background:linear-gradient(135deg,var(--cyan),#00aaff);color:#000;border-radius:999px;text-decoration:none;font-weight:700;box-shadow:0 0 20px rgba(79,245,255,.4);transition:all .3s ease;}
     .cta:hover{filter:brightness(1.2);}
+    .concepts{display:flex;flex-wrap:wrap;gap:20px;justify-content:center;margin-top:20px;}
+    .concepts img{width:320px;border-radius:12px;box-shadow:0 0 25px rgba(79,245,255,.4);cursor:pointer;transition:transform .3s ease;}
+    .concepts img:hover{transform:scale(1.03);}
     footer{text-align:center;padding:40px 0;font-size:14px;opacity:.8;}
     .hint{position:fixed;right:14px;bottom:14px;background:rgba(0,0,0,.45);border:1px solid rgba(255,255,255,.12);color:#fff;padding:10px 12px;border-radius:12px;font-size:12px;backdrop-filter:blur(6px);}
     .hint b{color:var(--cyan);}
@@ -40,6 +43,9 @@
   <div class="overlay"></div>
   <input id="bgPicker" type="file" accept="image/*" style="display:none" />
   <input id="logoPicker" type="file" accept="image/*" style="display:none" />
+  <input id="concept1Picker" type="file" accept="image/*" style="display:none" />
+  <input id="concept2Picker" type="file" accept="image/*" style="display:none" />
+  <input id="concept3Picker" type="file" accept="image/*" style="display:none" />
 
   <header>
     <img id="logoImg" src="https://i.ibb.co/gTx5qzm/ciphertech-logo.png" alt="CipherTech Logo" />
@@ -61,10 +67,11 @@
 
     <div class="card">
       <h2>Concept Renders</h2>
-      <p>Early conceptual visualizations of the Lumen Core — a cylindrical, stackable computing unit formed from transparent 5D glass and quantum-metal rings.</p>
-      <div style="display:flex;flex-wrap:wrap;gap:20px;justify-content:center;margin-top:20px;">
-        <img src="https://cdn.openai.com/tmp/lumen_render_1.png" alt="Lumen concept 1" style="width:320px;border-radius:12px;box-shadow:0 0 25px rgba(79,245,255,.4);">
-        <img src="https://cdn.openai.com/tmp/lumen_render_2.png" alt="Lumen concept 2" style="width:320px;border-radius:12px;box-shadow:0 0 25px rgba(79,245,255,.4);">
+      <p>Tap on a render to upload your own image. These will stay saved even after refresh.</p>
+      <div class="concepts">
+        <img id="concept1" src="https://cdn.openai.com/tmp/lumen_render_1.png" alt="Lumen concept 1">
+        <img id="concept2" src="https://cdn.openai.com/tmp/lumen_render_2.png" alt="Lumen concept 2">
+        <img id="concept3" src="https://cdn.openai.com/tmp/lumen_render_3.png" alt="Lumen concept 3">
       </div>
       <p style="margin-top:20px;opacity:.85;">(More renders coming soon – the design is evolving.)</p>
     </div>
@@ -81,18 +88,74 @@
     © <span id="year"></span> CipherTech. All rights reserved.
   </footer>
 
-  <div class="hint">Click <b>background</b> to change it • Click <b>logo</b> to change it • <a href="#" id="resetBtn" style="color:#fff;text-decoration:underline">Reset</a></div>
+  <div class="hint">Click <b>background</b> to change it • Click <b>logo</b> or <b>renders</b> to change them • <a href="#" id="resetBtn" style="color:#fff;text-decoration:underline">Reset</a></div>
 
   <script>
-    const BG_KEY='ct_bg',LOGO_KEY='ct_logo',bgDiv=document.getElementById('bgImg'),logoImg=document.getElementById('logoImg'),bgPicker=document.getElementById('bgPicker'),logoPicker=document.getElementById('logoPicker'),resetBtn=document.getElementById('resetBtn');
-    const savedBg=localStorage.getItem(BG_KEY),savedLogo=localStorage.getItem(LOGO_KEY);
+    const BG_KEY='ct_bg',LOGO_KEY='ct_logo';
+    const conceptKeys=['ct_concept1','ct_concept2','ct_concept3'];
+    const bgDiv=document.getElementById('bgImg');
+    const logoImg=document.getElementById('logoImg');
+    const bgPicker=document.getElementById('bgPicker');
+    const logoPicker=document.getElementById('logoPicker');
+    const resetBtn=document.getElementById('resetBtn');
+    const conceptImgs=conceptKeys.map((_,i)=>document.getElementById(`concept${i+1}`));
+    const conceptPickers=conceptKeys.map((_,i)=>document.getElementById(`concept${i+1}Picker`));
+
+    const savedBg=localStorage.getItem(BG_KEY);
+    const savedLogo=localStorage.getItem(LOGO_KEY);
     if(savedBg)bgDiv.style.backgroundImage=`url(${savedBg})`;
     if(savedLogo)logoImg.src=savedLogo;
-    document.body.addEventListener('click',e=>{const ui=e.target.closest('header,nav,img,.cta,.hint,footer,a');if(!ui)bgPicker.click();});
-    bgPicker.addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{bgDiv.style.backgroundImage=`url(${r.result})`;try{localStorage.setItem(BG_KEY,r.result);}catch{}};r.readAsDataURL(f);});
+
+    conceptKeys.forEach((k,i)=>{
+      const saved=localStorage.getItem(k);
+      if(saved) conceptImgs[i].src=saved;
+    });
+
+    document.body.addEventListener('click',e=>{
+      const ui=e.target.closest('header,nav,img,.cta,.hint,footer,a');
+      if(!ui)bgPicker.click();
+    });
+
+    bgPicker.addEventListener('change',e=>{
+      const f=e.target.files[0];
+      if(!f)return;
+      const r=new FileReader();
+      r.onload=()=>{bgDiv.style.backgroundImage=`url(${r.result})`;try{localStorage.setItem(BG_KEY,r.result);}catch{}};
+      r.readAsDataURL(f);
+    });
+
     logoImg.addEventListener('click',()=>logoPicker.click());
-    logoPicker.addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{logoImg.src=r.result;try{localStorage.setItem(LOGO_KEY,r.result);}catch{}};r.readAsDataURL(f);});
-    resetBtn.addEventListener('click',e=>{e.preventDefault();localStorage.removeItem(BG_KEY);localStorage.removeItem(LOGO_KEY);bgDiv.style.backgroundImage="url('https://cdn.openai.com/tmp/file_000000008ec061fdb799ce79ae92ccdb.png')";logoImg.src="https://i.ibb.co/gTx5qzm/ciphertech-logo.png";});
+    logoPicker.addEventListener('change',e=>{
+      const f=e.target.files[0];
+      if(!f)return;
+      const r=new FileReader();
+      r.onload=()=>{logoImg.src=r.result;try{localStorage.setItem(LOGO_KEY,r.result);}catch{}};
+      r.readAsDataURL(f);
+    });
+
+    conceptImgs.forEach((img,i)=>{
+      img.addEventListener('click',()=>conceptPickers[i].click());
+      conceptPickers[i].addEventListener('change',e=>{
+        const f=e.target.files[0];
+        if(!f)return;
+        const r=new FileReader();
+        r.onload=()=>{img.src=r.result;try{localStorage.setItem(conceptKeys[i],r.result);}catch{}};
+        r.readAsDataURL(f);
+      });
+    });
+
+    resetBtn.addEventListener('click',e=>{
+      e.preventDefault();
+      localStorage.removeItem(BG_KEY);
+      localStorage.removeItem(LOGO_KEY);
+      conceptKeys.forEach(k=>localStorage.removeItem(k));
+      bgDiv.style.backgroundImage="url('https://cdn.openai.com/tmp/file_000000008ec061fdb799ce79ae92ccdb.png')";
+      logoImg.src="https://i.ibb.co/gTx5qzm/ciphertech-logo.png";
+      conceptImgs[0].src="https://cdn.openai.com/tmp/lumen_render_1.png";
+      conceptImgs[1].src="https://cdn.openai.com/tmp/lumen_render_2.png";
+      conceptImgs[2].src="https://cdn.openai.com/tmp/lumen_render_3.png";
+    });
+
     document.getElementById('year').textContent=new Date().getFullYear();
   </script>
 </body>
