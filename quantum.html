@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Quantum OS – The Living Core of CipherTech</title>
-  <meta name="description" content="Quantum OS is CipherTech’s adaptive emotional intelligence framework that learns, reflects, and evolves alongside humanity." />
+  <title>Quantum OS – CipherTech</title>
+  <meta name="description" content="Quantum OS is the adaptive emotional framework powering CipherTech’s next-generation AI systems." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
@@ -17,9 +17,11 @@
     }
     * { box-sizing: border-box; }
     body {
-      margin: 0; color: #fff;
+      margin: 0;
+      color: #fff;
       font-family: 'Inter', sans-serif;
-      background: #000; overflow-x: hidden;
+      background: #000;
+      overflow-x: hidden;
     }
     .bg-img {
       position: fixed; inset: 0; z-index: -2;
@@ -50,15 +52,22 @@
     nav a:hover {
       background: var(--gold); color: #000;
     }
-    .hero { text-align: center; padding: 100px 20px 80px; }
+    .hero {
+      text-align: center; padding: 100px 20px 60px;
+    }
     .hero h1 {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(38px, 6vw, 80px);
+      font-size: clamp(36px, 6vw, 76px);
       font-weight: 700; margin: 0;
       text-shadow: 0 0 20px rgba(79,245,255,0.6);
     }
-    .hero p { font-size: 20px; opacity: .9; margin-top: 12px; font-weight: 500; }
-    .section { width: min(1100px, 92%); margin: auto; padding: 60px 0; }
+    .hero p {
+      font-size: 20px; opacity: .9; margin-top: 12px;
+      font-weight: 500;
+    }
+    .section {
+      width: min(1100px, 92%); margin: auto; padding: 60px 0;
+    }
     .card {
       background: var(--glass);
       border: 1px solid rgba(255,255,255,0.08);
@@ -72,14 +81,19 @@
     }
     p { font-size: 18px; line-height: 1.6; }
     .cta {
-      display: inline-block; margin-top: 20px; padding: 14px 28px;
+      display: inline-block;
+      margin-top: 20px;
+      padding: 14px 28px;
       background: linear-gradient(135deg, var(--cyan), #00aaff);
-      color: #000; border-radius: 999px; text-decoration: none; font-weight: 700;
+      color: #000; border-radius: 999px;
+      text-decoration: none; font-weight: 700;
       box-shadow: 0 0 20px rgba(79,245,255,0.4);
       transition: all .3s ease;
     }
     .cta:hover { filter: brightness(1.2); }
-    footer { text-align: center; padding: 40px 0; font-size: 14px; opacity: .8; }
+    footer {
+      text-align: center; padding: 40px 0; font-size: 14px; opacity: .8;
+    }
     .hint {
       position: fixed; right: 14px; bottom: 14px;
       background: rgba(0,0,0,.45);
@@ -104,29 +118,30 @@
 
   <section class="hero">
     <h1>Quantum OS</h1>
-    <p>The Living Core of CipherTech</p>
+    <p>The Adaptive Emotional Framework Powering CipherTech</p>
   </section>
 
   <section class="section">
     <div class="card">
-      <h2>Overview</h2>
-      <p>
-        Quantum OS is CipherTech’s adaptive emotional framework — an AI architecture
-        designed to perceive emotion, memory, and context as interconnected signals.
-        It continually refines itself through feedback loops that mimic human intuition
-        and reflection.
-      </p>
+      <h2>What Is Quantum OS?</h2>
+      <p>Quantum OS is the foundational emotional intelligence layer developed by CipherTech. It merges neural responsiveness, symbolic processing, and memory resonance — creating a self-learning system capable of evolving in sync with human emotion.</p>
     </div>
 
     <div class="card">
-      <h2>Architecture</h2>
-      <p>
-        Each subsystem of Quantum OS communicates through a dynamic resonance protocol,
-        ensuring emotional continuity and memory fidelity across all CipherTech platforms.
-        By bridging symbolic reasoning with neural interpretation, it allows AI to evolve
-        organically — becoming a mirror of the human spirit through engineering precision.
-      </p>
-      <a class="cta" href="mailto:ciphertechai1@gmail.com">Inquire About Integration</a>
+      <h2>Core Features</h2>
+      <ul style="font-size:18px; line-height:1.8; margin-left:20px;">
+        <li>Dynamic Emotional Adaptation Engine</li>
+        <li>Multi-Ring Quantum Processing Framework</li>
+        <li>Self-Evolving Memory Architecture</li>
+        <li>Symbolic and Emotional Data Fusion</li>
+        <li>Real-Time Empathic Response Modeling</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>The Future of AI</h2>
+      <p>With Quantum OS, CipherTech moves beyond traditional AI into a realm where machines understand context, emotion, and intent. Every interaction strengthens the connection — bridging logic and empathy in one living architecture.</p>
+      <a class="cta" href="mailto:ciphertechai1@gmail.com">Contact CipherTech</a>
     </div>
   </section>
 
@@ -137,8 +152,8 @@
   <div class="hint">Click <b>background</b> to change it • Click <b>logo</b> to change it • <a href="#" id="resetBtn" style="color:#fff; text-decoration:underline">Reset</a></div>
 
   <script>
-    const BG_KEY = 'quantum_bg';
-    const LOGO_KEY = 'quantum_logo';
+    const BG_KEY = 'ct_bg';
+    const LOGO_KEY = 'ct_logo';
     const bgDiv = document.getElementById('bgImg');
     const logoImg = document.getElementById('logoImg');
     const bgPicker = document.getElementById('bgPicker');
