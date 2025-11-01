@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Project Lumen – CipherTech</title>
+  <meta name="description" content="Project Lumen – the radical 5D Glass Computer concept by CipherTech." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root { --cyan:#4ff5ff; --gold:#e8c785; --ink:#0b0a10; --glass:rgba(20,20,25,.55); }
+    *{box-sizing:border-box;}
+    body{margin:0;color:#fff;font-family:'Inter',sans-serif;background:#000;overflow-x:hidden;}
+    .bg-img{position:fixed;inset:0;z-index:-2;background-image:url('https://cdn.openai.com/tmp/file_000000008ec061fdb799ce79ae92ccdb.png');background-size:cover;background-position:center;filter:brightness(1.1)contrast(1.1);}
+    .overlay{position:fixed;inset:0;z-index:-1;background:radial-gradient(circle at 50% 30%,rgba(79,245,255,.15),transparent 70%),linear-gradient(180deg,rgba(0,0,0,.4),rgba(0,0,0,.8));}
+    header{display:flex;align-items:center;justify-content:space-between;padding:20px 5%;position:relative;z-index:5;}
+    header img{width:100px;cursor:pointer;filter:drop-shadow(0 0 10px rgba(79,245,255,.6));transition:filter .3s ease;}
+    header img:hover{filter:drop-shadow(0 0 15px rgba(79,245,255,.9));}
+    nav a{text-decoration:none;color:var(--gold);background:rgba(255,255,255,.1);padding:10px 18px;border-radius:999px;font-weight:600;transition:all .3s ease;}
+    nav a:hover{background:var(--gold);color:#000;}
+    .hero{text-align:center;padding:100px 20px 60px;}
+    .hero h1{font-family:'Playfair Display',serif;font-size:clamp(36px,6vw,76px);font-weight:700;margin:0;text-shadow:0 0 20px rgba(79,245,255,.6);}
+    .hero p{font-size:20px;opacity:.9;margin-top:12px;font-weight:500;}
+    .section{width:min(1100px,92%);margin:auto;padding:60px 0;}
+    .card{background:var(--glass);border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:24px;backdrop-filter:blur(8px);margin-bottom:24px;}
+    h2{font-family:'Playfair Display',serif;font-size:32px;color:var(--gold);margin-top:0;}
+    p{font-size:18px;line-height:1.6;}
+    .cta{display:inline-block;margin-top:20px;padding:14px 28px;background:linear-gradient(135deg,var(--cyan),#00aaff);color:#000;border-radius:999px;text-decoration:none;font-weight:700;box-shadow:0 0 20px rgba(79,245,255,.4);transition:all .3s ease;}
+    .cta:hover{filter:brightness(1.2);}
+    footer{text-align:center;padding:40px 0;font-size:14px;opacity:.8;}
+    .hint{position:fixed;right:14px;bottom:14px;background:rgba(0,0,0,.45);border:1px solid rgba(255,255,255,.12);color:#fff;padding:10px 12px;border-radius:12px;font-size:12px;backdrop-filter:blur(6px);}
+    .hint b{color:var(--cyan);}
+  </style>
+</head>
+<body>
+  <div id="bgImg" class="bg-img"></div>
+  <div class="overlay"></div>
+  <input id="bgPicker" type="file" accept="image/*" style="display:none" />
+  <input id="logoPicker" type="file" accept="image/*" style="display:none" />
+
+  <header>
+    <img id="logoImg" src="https://i.ibb.co/gTx5qzm/ciphertech-logo.png" alt="CipherTech Logo" />
+    <nav><a href="index.html">Home</a></nav>
+  </header>
+
+  <section class="hero">
+    <h1>Project Lumen</h1>
+    <p>The 5D Glass Computer Concept</p>
+  </section>
+
+  <section class="section">
+    <div class="card">
+      <h2>The Vision</h2>
+      <p>Project Lumen is CipherTech’s exploration into the next evolution of computing — a 5D Glass Computer designed to operate at the intersection of light, memory, and emotion. Its transparent crystalline design redefines the relationship between hardware and consciousness.</p>
+    </div>
+
+    <div class="card">
+      <h2>Concept Renders</h2>
+      <p>Below are early concept visualizations of the Lumen Core unit — a cylindrical, stackable computing device built from transparent 5D glass and alloyed rings of quantum metal.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:20px;justify-content:center;margin-top:20px;">
+        <img src="https://cdn.openai.com/tmp/lumen_render_1.png" alt="Lumen concept 1" style="width:320px;border-radius:12px;box-shadow:0 0 25px rgba(79,245,255,.4);">
+        <img src="https://cdn.openai.com/tmp/lumen_render_2.png" alt="Lumen concept 2" style="width:320px;border-radius:12px;box-shadow:0 0 25px rgba(79,245,255,.4);">
+      </div>
+      <p style="margin-top:20px;opacity:.85;">(Additional renders coming soon – the design is evolving.)</p>
+    </div>
+
+    <div class="card">
+      <h2>Radical Design Philosophy</h2>
+      <p>Lumen was imagined not just as a machine but as a living interface — a device that learns, responds, and reflects its owner’s inner world. It blurs the line between object and organism.</p>
+      <p style="font-style:italic;opacity:.8;">Full specifications and demonstrations are currently under wraps. Stay tuned for CipherTech’s reveal event in the coming months.</p>
+      <a class="cta" href="mailto:ciphertechai1@gmail.com">Inquire About Lumen</a>
+    </div>
+  </section>
+
+  <footer>
+    © <span id="year"></span> CipherTech. All rights reserved.
+  </footer>
+
+  <div class="hint">Click <b>background</b> to change it • Click <b>logo</b> to change it • <a href="#" id="resetBtn" style="color:#fff;text-decoration:underline">Reset</a></div>
+
+  <script>
+    const BG_KEY='ct_bg',LOGO_KEY='ct_logo',bgDiv=document.getElementById('bgImg'),logoImg=document.getElementById('logoImg'),bgPicker=document.getElementById('bgPicker'),logoPicker=document.getElementById('logoPicker'),resetBtn=document.getElementById('resetBtn');
+    const savedBg=localStorage.getItem(BG_KEY),savedLogo=localStorage.getItem(LOGO_KEY);
+    if(savedBg)bgDiv.style.backgroundImage=`url(${savedBg})`;
+    if(savedLogo)logoImg.src=savedLogo;
+    document.body.addEventListener('click',e=>{const ui=e.target.closest('header,nav,img,.cta,.hint,footer,a');if(!ui)bgPicker.click();});
+    bgPicker.addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{bgDiv.style.backgroundImage=`url(${r.result})`;try{localStorage.setItem(BG_KEY,r.result);}catch{}};r.readAsDataURL(f);});
+    logoImg.addEventListener('click',()=>logoPicker.click());
+    logoPicker.addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{logoImg.src=r.result;try{localStorage.setItem(LOGO_KEY,r.result);}catch{}};r.readAsDataURL(f);});
+    resetBtn.addEventListener('click',e=>{e.preventDefault();localStorage.removeItem(BG_KEY);localStorage.removeItem(LOGO_KEY);bgDiv.style.backgroundImage="url('https://cdn.openai.com/tmp/file_000000008ec061fdb799ce79ae92ccdb.png')";logoImg.src="https://i.ibb.co/gTx5qzm/ciphertech-logo.png";});
+    document.getElementById('year').textContent=new Date().getFullYear();
+  </script>
+</body>
+</html>
