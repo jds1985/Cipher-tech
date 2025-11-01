@@ -96,6 +96,7 @@
 
   <div class="hint">Click <b>background</b> to change it • Click <b>logo</b> or <b>renders</b> to change them • <a href="#" id="resetBtn" style="color:#fff;text-decoration:underline">Reset</a></div>
 
+  <!-- ✅ Fixed persistent saving script -->
   <script>
     const BG_KEY='ct_bg',LOGO_KEY='ct_logo';
     const conceptKeys=['ct_concept1','ct_concept2','ct_concept3'];
@@ -108,7 +109,7 @@
     const conceptImgs=conceptKeys.map((_,i)=>document.getElementById(`concept${i+1}`));
     const conceptPickers=conceptKeys.map((_,i)=>document.getElementById(`concept${i+1}Picker`));
 
-    // load saved
+    // ✅ Load saved data
     const savedBg=localStorage.getItem(BG_KEY);
     const savedLogo=localStorage.getItem(LOGO_KEY);
     if(savedBg) bgDiv.style.backgroundImage=`url(${savedBg})`;
@@ -118,7 +119,7 @@
       if(saved) conceptImgs[i].src=saved;
     });
 
-    // background clicker
+    // ✅ Background uploader
     bgClicker.addEventListener('click',()=>bgPicker.click());
     bgPicker.addEventListener('change',e=>{
       const f=e.target.files[0];
@@ -126,12 +127,12 @@
       const r=new FileReader();
       r.onload=()=>{
         bgDiv.style.backgroundImage=`url(${r.result})`;
-        try{localStorage.setItem(BG_KEY,r.result);}catch{}
+        localStorage.setItem(BG_KEY,r.result);
       };
       r.readAsDataURL(f);
     });
 
-    // logo
+    // ✅ Logo uploader
     logoImg.addEventListener('click',()=>logoPicker.click());
     logoPicker.addEventListener('change',e=>{
       const f=e.target.files[0];
@@ -139,16 +140,14 @@
       const r=new FileReader();
       r.onload=()=>{
         logoImg.src=r.result;
-        try{localStorage.setItem(LOGO_KEY,r.result);}catch{}
+        localStorage.setItem(LOGO_KEY,r.result);
       };
       r.readAsDataURL(f);
     });
 
-    // concepts
+    // ✅ Concept image uploaders (persistent)
     conceptImgs.forEach((img,i)=>{
-      img.addEventListener('click',()=>{
-        conceptPickers[i].click();
-      });
+      img.addEventListener('click',()=>conceptPickers[i].click());
       conceptPickers[i].addEventListener('change',e=>{
         const f=e.target.files[0];
         if(!f)return;
@@ -157,16 +156,17 @@
           img.src=r.result;
           img.classList.add('power-glow');
           setTimeout(()=>img.classList.remove('power-glow'),1500);
-          try{localStorage.setItem(conceptKeys[i],r.result);}catch{}
+          localStorage.setItem(conceptKeys[i],r.result);
         };
         r.readAsDataURL(f);
       });
     });
 
-    // reset
+    // ✅ Smart reset — only removes CipherTech keys
     resetBtn.addEventListener('click',e=>{
       e.preventDefault();
-      localStorage.clear();
+      [BG_KEY, LOGO_KEY, ...conceptKeys].forEach(k=>localStorage.removeItem(k));
+
       bgDiv.style.backgroundImage="url('https://cdn.openai.com/tmp/file_000000008ec061fdb799ce79ae92ccdb.png')";
       logoImg.src="https://i.ibb.co/gTx5qzm/ciphertech-logo.png";
       conceptImgs[0].src="https://cdn.openai.com/tmp/lumen_render_1.png";
