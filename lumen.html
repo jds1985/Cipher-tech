@@ -12,7 +12,8 @@
     :root { --cyan:#4ff5ff; --gold:#e8c785; --glass:rgba(20,20,25,.55); }
     *{box-sizing:border-box;}
     body{margin:0;color:#fff;font-family:'Inter',sans-serif;background:#000;overflow-x:hidden;}
-    .bg-img{position:fixed;inset:0;z-index:-2;background-image:url('https://cdn.openai.com/tmp/file_000000008ec061fdb799ce79ae92ccdb.png');background-size:cover;background-position:center;filter:brightness(1.1)contrast(1.1);}
+    .bg-img{position:fixed;inset:0;z-index:-3;background-image:url('https://cdn.openai.com/tmp/file_000000008ec061fdb799ce79ae92ccdb.png');background-size:cover;background-position:center;filter:brightness(1.1)contrast(1.1);}
+    .bg-clicker{position:fixed;inset:0;z-index:-2;cursor:pointer;}
     .overlay{position:fixed;inset:0;z-index:-1;background:radial-gradient(circle at 50% 30%,rgba(79,245,255,.15),transparent 70%),linear-gradient(180deg,rgba(0,0,0,.4),rgba(0,0,0,.8));}
     header{display:flex;align-items:center;justify-content:space-between;padding:20px 5%;position:relative;z-index:5;}
     header img{width:100px;cursor:pointer;filter:drop-shadow(0 0 10px rgba(79,245,255,.6));transition:filter .3s ease;}
@@ -25,7 +26,7 @@
     .hero p.tagline{font-size:20px;opacity:.9;margin-top:12px;font-weight:500;}
     .hero p.meaning{font-size:17px;color:var(--gold);margin-top:8px;letter-spacing:1px;}
     .section{width:min(1100px,92%);margin:auto;padding:60px 0;}
-    .card{background:var(--glass);border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:24px;backdrop-filter:blur(8px);margin-bottom:24px;}
+    .card{background:var(--glass);border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:24px;backdrop-filter:blur(8px);margin-bottom:24px;position:relative;z-index:2;}
     h2{font-family:'Playfair Display',serif;font-size:32px;color:var(--gold);margin-top:0;}
     p{font-size:18px;line-height:1.6;}
     .cta{display:inline-block;margin-top:20px;padding:14px 28px;background:linear-gradient(135deg,var(--cyan),#00aaff);color:#000;border-radius:999px;text-decoration:none;font-weight:700;box-shadow:0 0 20px rgba(79,245,255,.4);transition:all .3s ease;}
@@ -46,7 +47,9 @@
 </head>
 <body>
   <div id="bgImg" class="bg-img"></div>
+  <div id="bgClicker" class="bg-clicker"></div>
   <div class="overlay"></div>
+
   <input id="bgPicker" type="file" accept="image/*" style="display:none" />
   <input id="logoPicker" type="file" accept="image/*" style="display:none" />
   <input id="concept1Picker" type="file" accept="image/*" style="display:none" />
@@ -68,7 +71,7 @@
   <section class="section">
     <div class="card">
       <h2>The Vision</h2>
-      <p>Project L.U.M.E.N. is CipherTech’s exploration into the next evolution of computing — a 5D Glass Computer designed to operate at the intersection of light, memory, and emotion. Its transparent crystalline design redefines the relationship between consciousness and computation.</p>
+      <p>Project L.U.M.E.N. is CipherTech’s exploration into the next evolution of computing — a 5D Glass Computer designed to operate at the intersection of light, memory, and emotion.</p>
     </div>
 
     <div class="card">
@@ -79,14 +82,11 @@
         <img id="concept2" src="https://cdn.openai.com/tmp/lumen_render_2.png" alt="Lumen concept 2">
         <img id="concept3" src="https://cdn.openai.com/tmp/lumen_render_3.png" alt="Lumen concept 3">
       </div>
-      <p style="margin-top:20px;opacity:.85;">(More renders coming soon – the design is evolving.)</p>
     </div>
 
     <div class="card">
       <h2>Radical Design Philosophy</h2>
-      <p>L.U.M.E.N. isn’t just a machine; it’s a living interface that learns, responds, and reflects its owner’s inner world. Built to unify emotional resonance and technological intelligence, it stands as a beacon of CipherTech’s belief that computing can feel alive.</p>
-      <p style="font-style:italic;opacity:.8;">Full specifications and demonstrations are currently under wraps. Stay tuned for CipherTech’s reveal event in the coming months.</p>
-      <a class="cta" href="mailto:ciphertechai1@gmail.com">Inquire About L.U.M.E.N.</a>
+      <p>L.U.M.E.N. isn’t just a machine; it’s a living interface that learns, responds, and reflects its owner’s inner world.</p>
     </div>
   </section>
 
@@ -100,6 +100,7 @@
     const BG_KEY='ct_bg',LOGO_KEY='ct_logo';
     const conceptKeys=['ct_concept1','ct_concept2','ct_concept3'];
     const bgDiv=document.getElementById('bgImg');
+    const bgClicker=document.getElementById('bgClicker');
     const logoImg=document.getElementById('logoImg');
     const bgPicker=document.getElementById('bgPicker');
     const logoPicker=document.getElementById('logoPicker');
@@ -107,7 +108,7 @@
     const conceptImgs=conceptKeys.map((_,i)=>document.getElementById(`concept${i+1}`));
     const conceptPickers=conceptKeys.map((_,i)=>document.getElementById(`concept${i+1}Picker`));
 
-    // Load saved images
+    // load saved
     const savedBg=localStorage.getItem(BG_KEY);
     const savedLogo=localStorage.getItem(LOGO_KEY);
     if(savedBg) bgDiv.style.backgroundImage=`url(${savedBg})`;
@@ -117,16 +118,8 @@
       if(saved) conceptImgs[i].src=saved;
     });
 
-    // Background click handler (only blank space)
-    document.body.addEventListener('click',e=>{
-      const ignoreSelectors = [
-        'header','nav','img','.cta','.hint','footer','a','.concepts','.concepts *'
-      ];
-      const isUI = ignoreSelectors.some(sel => e.target.closest(sel));
-      if(!isUI) bgPicker.click();
-    });
-
-    // Background change
+    // background clicker
+    bgClicker.addEventListener('click',()=>bgPicker.click());
     bgPicker.addEventListener('change',e=>{
       const f=e.target.files[0];
       if(!f)return;
@@ -138,11 +131,8 @@
       r.readAsDataURL(f);
     });
 
-    // Logo change
-    logoImg.addEventListener('click',e=>{
-      e.stopPropagation();
-      logoPicker.click();
-    });
+    // logo
+    logoImg.addEventListener('click',()=>logoPicker.click());
     logoPicker.addEventListener('change',e=>{
       const f=e.target.files[0];
       if(!f)return;
@@ -154,10 +144,9 @@
       r.readAsDataURL(f);
     });
 
-    // Concept images
+    // concepts
     conceptImgs.forEach((img,i)=>{
-      img.addEventListener('click',e=>{
-        e.stopPropagation();
+      img.addEventListener('click',()=>{
         conceptPickers[i].click();
       });
       conceptPickers[i].addEventListener('change',e=>{
@@ -174,12 +163,10 @@
       });
     });
 
-    // Reset
+    // reset
     resetBtn.addEventListener('click',e=>{
       e.preventDefault();
-      localStorage.removeItem(BG_KEY);
-      localStorage.removeItem(LOGO_KEY);
-      conceptKeys.forEach(k=>localStorage.removeItem(k));
+      localStorage.clear();
       bgDiv.style.backgroundImage="url('https://cdn.openai.com/tmp/file_000000008ec061fdb799ce79ae92ccdb.png')";
       logoImg.src="https://i.ibb.co/gTx5qzm/ciphertech-logo.png";
       conceptImgs[0].src="https://cdn.openai.com/tmp/lumen_render_1.png";
