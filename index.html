@@ -8,92 +8,14 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --cyan: #4ff5ff;
-      --gold: #e8c785;
-      --ink: #0b0a10;
-      --glass: rgba(20,20,25,0.55);
-    }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      color: #fff;
-      font-family: 'Inter', sans-serif;
-      background: #000;
-      overflow-x: hidden;
-    }
-    /* ✅ Google Drive background */
-    .bg-img {
-      position: fixed; inset: 0; z-index: -2;
-      background-image: url('https://drive.google.com/uc?export=view&id=1ONiaIH9xFv9byaxM5YI7JzKd7vxYHVWX');
-      background-size: cover;
-      background-position: center;
-      filter: brightness(1.1) contrast(1.1);
-    }
-    .overlay {
-      position: fixed; inset: 0; z-index: -1;
-      background: radial-gradient(circle at 50% 30%, rgba(79,245,255,0.15), transparent 70%),
-                  linear-gradient(180deg, rgba(0,0,0,0.4), rgba(0,0,0,0.8));
-    }
-    header {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 20px 5%; position: relative; z-index: 5;
-    }
-    header img {
-      width: 100px; cursor: pointer; filter: drop-shadow(0 0 10px rgba(79,245,255,0.6));
-      transition: filter .3s ease;
-    }
-    header img:hover { filter: drop-shadow(0 0 15px rgba(79,245,255,0.9)); }
-    nav a {
-      text-decoration: none; color: var(--gold);
-      background: rgba(255,255,255,0.1);
-      padding: 10px 18px; border-radius: 999px;
-      font-weight: 600; transition: all .3s ease;
-    }
-    nav a:hover { background: var(--gold); color: #000; }
-    .hero { text-align: center; padding: 100px 20px 80px; }
-    .hero h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(38px, 6vw, 80px);
-      font-weight: 700; margin: 0;
-      text-shadow: 0 0 20px rgba(79,245,255,0.6);
-    }
-    .hero p { font-size: 20px; opacity: .9; margin-top: 12px; font-weight: 500; }
-    .section { width: min(1100px, 92%); margin: auto; padding: 60px 0; }
-    .card {
-      background: var(--glass);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 18px;
-      padding: 24px; backdrop-filter: blur(8px);
-      margin-bottom: 24px;
-    }
-    h2 { font-family: 'Playfair Display', serif; font-size: 32px; color: var(--gold); margin-top: 0; }
-    p { font-size: 18px; line-height: 1.6; }
-    .cta {
-      display: inline-block; margin-top: 20px; padding: 14px 28px;
-      background: linear-gradient(135deg, var(--cyan), #00aaff);
-      color: #000; border-radius: 999px; text-decoration: none; font-weight: 700;
-      box-shadow: 0 0 20px rgba(79,245,255,0.4); transition: all .3s ease;
-    }
-    .cta:hover { filter: brightness(1.2); }
-    footer { text-align: center; padding: 40px 0; font-size: 14px; opacity: .8; }
-    .hint {
-      position: fixed; right: 14px; bottom: 14px; background: rgba(0,0,0,.45);
-      border: 1px solid rgba(255,255,255,.12); color: #fff; padding: 10px 12px;
-      border-radius: 12px; font-size: 12px; backdrop-filter: blur(6px);
-    }
-    .hint b { color: var(--cyan); }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div id="bgImg" class="bg-img"></div>
+  <div class="bg-img"></div>
   <div class="overlay"></div>
-  <input id="bgPicker" type="file" accept="image/*" style="display:none" />
-  <input id="logoPicker" type="file" accept="image/*" style="display:none" />
 
   <header>
-    <img id="logoImg" src="https://drive.google.com/uc?export=view&id=1Wo9qYf92EjdFY-yoZ5xRW8rbj8-VJ6j9" alt="CipherTech Logo" />
+    <img src="https://drive.google.com/uc?export=view&id=1Wo9qYf92EjdFY-yoZ5xRW8rbj8-VJ6j9" alt="CipherTech Logo" />
     <nav><a href="#contact">Contact</a></nav>
   </header>
 
@@ -131,59 +53,6 @@
     © <span id="year"></span> CipherTech. All rights reserved.
   </footer>
 
-  <div class="hint">Click <b>background</b> to change it • Click <b>logo</b> to change it • <a href="#" id="resetBtn" style="color:#fff; text-decoration:underline">Reset</a></div>
-
-  <script>
-    const BG_KEY = 'ct_bg';
-    const LOGO_KEY = 'ct_logo';
-    const bgDiv = document.getElementById('bgImg');
-    const logoImg = document.getElementById('logoImg');
-    const bgPicker = document.getElementById('bgPicker');
-    const logoPicker = document.getElementById('logoPicker');
-    const resetBtn = document.getElementById('resetBtn');
-
-    const savedBg = localStorage.getItem(BG_KEY);
-    const savedLogo = localStorage.getItem(LOGO_KEY);
-    if (savedBg) bgDiv.style.backgroundImage = `url(${savedBg})`;
-    if (savedLogo) logoImg.src = savedLogo;
-
-    document.body.addEventListener('click', (e) => {
-      const ui = e.target.closest('header, nav, img, .cta, .hint, footer, a');
-      if (!ui) bgPicker.click();
-    });
-
-    bgPicker.addEventListener('change', (e) => {
-      const file = e.target.files[0];
-      if (!file) return;
-      const reader = new FileReader();
-      reader.onload = () => {
-        bgDiv.style.backgroundImage = `url(${reader.result})`;
-        try { localStorage.setItem(BG_KEY, reader.result); } catch {}
-      };
-      reader.readAsDataURL(file);
-    });
-
-    logoImg.addEventListener('click', () => logoPicker.click());
-    logoPicker.addEventListener('change', (e) => {
-      const file = e.target.files[0];
-      if (!file) return;
-      const reader = new FileReader();
-      reader.onload = () => {
-        logoImg.src = reader.result;
-        try { localStorage.setItem(LOGO_KEY, reader.result); } catch {}
-      };
-      reader.readAsDataURL(file);
-    });
-
-    resetBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      localStorage.removeItem(BG_KEY);
-      localStorage.removeItem(LOGO_KEY);
-      bgDiv.style.backgroundImage = "url('https://drive.google.com/uc?export=view&id=1ONiaIH9xFv9byaxM5YI7JzKd7vxYHVWX')";
-      logoImg.src = "https://drive.google.com/uc?export=view&id=1Wo9qYf92EjdFY-yoZ5xRW8rbj8-VJ6j9";
-    });
-
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>
 </html>
