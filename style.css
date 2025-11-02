@@ -1,15 +1,16 @@
-/* === CipherTech Global Style === */
+/* ===/* === CipherTech Global Style === */
 
 :root {
   --cyan: #4ff5ff;
   --gold: #e8c785;
   --ink: #0b0a10;
   --glass: rgba(20,20,25,0.55);
+
+  /* Global image sources */
   --bg-url: url('https://drive.google.com/uc?export=view&id=1ONiaIH9xFv9byaxM5YI7JzKd7vxYHVWX');
   --logo-url: url('https://drive.google.com/uc?export=view&id=1Wo9qYf92EjdFY-yoZ5xRW8rbj8-VJ6j9');
 }
 
-/* Base layout */
 body {
   margin: 0;
   color: #fff;
@@ -18,7 +19,6 @@ body {
   overflow-x: hidden;
 }
 
-/* Universal background + overlay */
 .bg-img {
   position: fixed;
   inset: 0;
@@ -37,7 +37,6 @@ body {
               linear-gradient(180deg, rgba(0,0,0,0.4), rgba(0,0,0,0.8));
 }
 
-/* Header, hero, and card styling */
 header {
   display: flex;
   align-items: center;
@@ -53,7 +52,6 @@ header img {
   filter: drop-shadow(0 0 10px rgba(79,245,255,0.6));
   transition: filter .3s ease;
 }
-
 header img:hover { filter: drop-shadow(0 0 15px rgba(79,245,255,0.9)); }
 
 nav a {
@@ -65,14 +63,12 @@ nav a {
   font-weight: 600;
   transition: all .3s ease;
 }
-
 nav a:hover { background: var(--gold); color: #000; }
 
 .hero {
   text-align: center;
   padding: 100px 20px 80px;
 }
-
 .hero h1 {
   font-family: 'Playfair Display', serif;
   font-size: clamp(38px, 6vw, 80px);
@@ -80,7 +76,6 @@ nav a:hover { background: var(--gold); color: #000; }
   margin: 0;
   text-shadow: 0 0 20px rgba(79,245,255,0.6);
 }
-
 .hero p { font-size: 20px; opacity: .9; margin-top: 12px; font-weight: 500; }
 
 .section {
@@ -88,7 +83,6 @@ nav a:hover { background: var(--gold); color: #000; }
   margin: auto;
   padding: 60px 0;
 }
-
 .card {
   background: var(--glass);
   border: 1px solid rgba(255,255,255,0.08);
@@ -97,14 +91,12 @@ nav a:hover { background: var(--gold); color: #000; }
   backdrop-filter: blur(8px);
   margin-bottom: 24px;
 }
-
 h2 {
   font-family: 'Playfair Display', serif;
   font-size: 32px;
   color: var(--gold);
   margin-top: 0;
 }
-
 p { font-size: 18px; line-height: 1.6; }
 
 .cta {
@@ -119,7 +111,6 @@ p { font-size: 18px; line-height: 1.6; }
   box-shadow: 0 0 20px rgba(79,245,255,0.4);
   transition: all .3s ease;
 }
-
 .cta:hover { filter: brightness(1.2); }
 
 footer {
@@ -127,19 +118,4 @@ footer {
   padding: 40px 0;
   font-size: 14px;
   opacity: .8;
-}
-
-.hint {
-  position: fixed;
-  right: 14px;
-  bottom: 14px;
-  background: rgba(0,0,0,.45);
-  border: 1px solid rgba(255,255,255,.12);
-  color: #fff;
-  padding: 10px 12px;
-  border-radius: 12px;
-  font-size: 12px;
-  backdrop-filter: blur(6px);
-}
-
-.hint b { color: var(--cyan); }
+} CipherTech Globa
