@@ -1,4 +1,4 @@
-/* === CipherTech Global Style (Drive links fixed) === */
+/* === CipherTech Global Style (Google Drive links fixed) === */
 
 :root {
   --cyan: #4ff5ff;
@@ -6,11 +6,12 @@
   --ink: #0b0a10;
   --glass: rgba(20,20,25,0.55);
 
-  /* Direct-drive endpoints (forces raw image delivery) */
+  /* ✅ Force Drive to serve raw images */
   --bg-url: url('https://drive.google.com/uc?export=download&id=1ONiaIH9xFv9byaxM5YI7JzKd7vxYHVWX');
   --logo-url: url('https://drive.google.com/uc?export=download&id=1Wo9qYf92EjdFY-yoZ5xRW8rbj8-VJ6j9');
 }
 
+/* Base styles */
 body {
   margin: 0;
   color: #fff;
@@ -19,6 +20,7 @@ body {
   overflow-x: hidden;
 }
 
+/* === Background & overlay === */
 .bg-img {
   position: fixed;
   inset: 0;
@@ -26,6 +28,7 @@ body {
   background-image: var(--bg-url);
   background-size: cover;
   background-position: center;
+  background-repeat: no-repeat;
   filter: brightness(1.1) contrast(1.1);
 }
 
@@ -37,6 +40,7 @@ body {
               linear-gradient(180deg, rgba(0,0,0,0.4), rgba(0,0,0,0.8));
 }
 
+/* === Header & nav === */
 header {
   display: flex;
   align-items: center;
@@ -51,9 +55,10 @@ header img {
   cursor: pointer;
   filter: drop-shadow(0 0 10px rgba(79,245,255,0.6));
   transition: filter .3s ease;
-  content: var(--logo-url);
 }
-header img:hover { filter: drop-shadow(0 0 15px rgba(79,245,255,0.9)); }
+header img:hover {
+  filter: drop-shadow(0 0 15px rgba(79,245,255,0.9));
+}
 
 nav a {
   text-decoration: none;
@@ -64,8 +69,12 @@ nav a {
   font-weight: 600;
   transition: all .3s ease;
 }
-nav a:hover { background: var(--gold); color: #000; }
+nav a:hover {
+  background: var(--gold);
+  color: #000;
+}
 
+/* === Hero section === */
 .hero {
   text-align: center;
   padding: 100px 20px 80px;
@@ -77,8 +86,14 @@ nav a:hover { background: var(--gold); color: #000; }
   margin: 0;
   text-shadow: 0 0 20px rgba(79,245,255,0.6);
 }
-.hero p { font-size: 20px; opacity: .9; margin-top: 12px; font-weight: 500; }
+.hero p {
+  font-size: 20px;
+  opacity: .9;
+  margin-top: 12px;
+  font-weight: 500;
+}
 
+/* === Content cards === */
 .section {
   width: min(1100px, 92%);
   margin: auto;
@@ -98,8 +113,12 @@ h2 {
   color: var(--gold);
   margin-top: 0;
 }
-p { font-size: 18px; line-height: 1.6; }
+p {
+  font-size: 18px;
+  line-height: 1.6;
+}
 
+/* === Buttons & footer === */
 .cta {
   display: inline-block;
   margin-top: 20px;
