@@ -16,7 +16,6 @@
       background-image:url('https://i.imgur.com/siPKkpb.png');
       background-size:cover;background-position:center;
       filter:brightness(1.1) contrast(1.1);}
-    .bg-clicker{position:fixed;inset:0;z-index:-2;cursor:pointer;}
     .overlay{position:fixed;inset:0;z-index:-1;
       background:radial-gradient(circle at 50% 30%,rgba(79,245,255,.15),transparent 70%),
       linear-gradient(180deg,rgba(0,0,0,.4),rgba(0,0,0,.8));}
@@ -37,25 +36,14 @@
     .concepts{display:flex;flex-wrap:wrap;gap:20px;justify-content:center;margin-top:20px;}
     .concepts img{width:320px;border-radius:12px;box-shadow:0 0 25px rgba(79,245,255,.4);cursor:pointer;transition:transform .3s ease, box-shadow .3s ease;}
     .concepts img:hover{transform:scale(1.03);}
-    .power-glow{animation:glowPulse 1.5s ease-out;}
-    @keyframes glowPulse{
-      0%{box-shadow:0 0 25px rgba(79,245,255,.4);}
-      50%{box-shadow:0 0 45px rgba(79,245,255,1);}
-      100%{box-shadow:0 0 25px rgba(79,245,255,.4);}
-    }
     footer{text-align:center;padding:40px 0;font-size:14px;opacity:.8;}
     .hint{position:fixed;right:14px;bottom:14px;background:rgba(0,0,0,.45);border:1px solid rgba(255,255,255,.12);color:#fff;padding:10px 12px;border-radius:12px;font-size:12px;backdrop-filter:blur(6px);}
     .hint b{color:var(--cyan);}
   </style>
 </head>
 <body>
-  <div id="bgImg" class="bg-img"></div>
-  <div id="bgClicker" class="bg-clicker"></div>
+  <div class="bg-img"></div>
   <div class="overlay"></div>
-
-  <input id="concept1Picker" type="file" accept="image/*" style="display:none" />
-  <input id="concept2Picker" type="file" accept="image/*" style="display:none" />
-  <input id="concept3Picker" type="file" accept="image/*" style="display:none" />
 
   <header>
     <img id="logoImg" src="https://i.imgur.com/uSjUTuS.png" alt="CipherTech Logo" />
@@ -77,60 +65,52 @@
 
     <div class="card">
       <h2>Concept Renders</h2>
-      <p>Tap on a render to upload your own image. These will stay saved even after refresh on this device.</p>
+      <p>Tap on a render to upload your own image (for testing). Default images below are your official concepts.</p>
       <div class="concepts">
-        <img id="concept1" src="https://cdn.openai.com/tmp/lumen_render_1.png" alt="Lumen concept 1">
-        <img id="concept2" src="https://cdn.openai.com/tmp/lumen_render_2.png" alt="Lumen concept 2">
-        <img id="concept3" src="https://cdn.openai.com/tmp/lumen_render_3.png" alt="Lumen concept 3">
+        <img id="concept1" src="https://i.imgur.com/cmEaSqr.png" alt="Lumen Concept 1">
+        <img id="concept2" src="https://i.imgur.com/jFGzjK6.png" alt="Lumen Concept 2">
+        <img id="concept3" src="https://i.imgur.com/wvBm5Lp.png" alt="Lumen Concept 3">
       </div>
     </div>
 
     <div class="card">
       <h2>Radical Design Philosophy</h2>
-      <p>L.U.M.E.N. isn’t just a machine; it’s a living interface that learns, responds, and reflects its owner’s inner world.</p>
+      <p>L.U.M.E.N. isn’t just a machine; it’s a living interface that learns, responds, and reflects its owner’s inner world — a seamless fusion of technology and spirit.</p>
     </div>
   </section>
 
   <footer>© <span id="year"></span> CipherTech. All rights reserved.</footer>
 
-  <div class="hint">Click <b>renders</b> to change them • <a href="#" id="resetBtn" style="color:#fff;text-decoration:underline">Reset</a></div>
+  <div class="hint">Click <b>renders</b> to test new images • <a href="#" id="resetBtn" style="color:#fff;text-decoration:underline">Reset</a></div>
 
   <script>
     const conceptKeys=['ct_concept1','ct_concept2','ct_concept3'];
-    const conceptImgs=conceptKeys.map((_,i)=>document.getElementById(`concept${i+1}`));
-    const conceptPickers=conceptKeys.map((_,i)=>document.getElementById(`concept${i+1}Picker`));
-
-    // Load saved
-    conceptKeys.forEach((key,i)=>{
-      const saved = localStorage.getItem(key);
-      if(saved) conceptImgs[i].src = saved;
-    });
-
-    // Concept uploads
-    conceptImgs.forEach((img,i)=>{
-      img.addEventListener('click',()=>conceptPickers[i].click());
-      conceptPickers[i].addEventListener('change',e=>{
-        const f = e.target.files[0];
-        if(!f)return;
-        const r = new FileReader();
-        r.onload = ()=>{
-          img.src = r.result;
-          try{localStorage.setItem(conceptKeys[i], r.result);}catch{}
-        };
+    const defaults=[
+      'https://i.imgur.com/cmEaSqr.png',
+      'https://i.imgur.com/jFGzjK6.png',
+      'https://i.imgur.com/wvBm5Lp.png'
+    ];
+    const imgs=conceptKeys.map((_,i)=>document.getElementById(`concept${i+1}`));
+    const pickers=[];
+    defaults.forEach((d,i)=>{
+      const input=document.createElement('input');
+      input.type='file';input.accept='image/*';input.style.display='none';
+      document.body.appendChild(input);pickers.push(input);
+      const saved=localStorage.getItem(conceptKeys[i]);
+      imgs[i].src=saved||d;
+      imgs[i].addEventListener('click',()=>input.click());
+      input.addEventListener('change',e=>{
+        const f=e.target.files[0];if(!f)return;
+        const r=new FileReader();
+        r.onload=()=>{imgs[i].src=r.result;try{localStorage.setItem(conceptKeys[i],r.result);}catch{}};
         r.readAsDataURL(f);
       });
     });
-
-    // Reset button
     document.getElementById('resetBtn').addEventListener('click',e=>{
       e.preventDefault();
-      conceptKeys.forEach(k=>localStorage.removeItem(k));
-      conceptImgs[0].src="https://cdn.openai.com/tmp/lumen_render_1.png";
-      conceptImgs[1].src="https://cdn.openai.com/tmp/lumen_render_2.png";
-      conceptImgs[2].src="https://cdn.openai.com/tmp/lumen_render_3.png";
+      conceptKeys.forEach((k,i)=>{localStorage.removeItem(k);imgs[i].src=defaults[i];});
     });
-
-    document.getElementById('year').textContent = new Date().getFullYear();
+    document.getElementById('year').textContent=new Date().getFullYear();
   </script>
 </body>
 </html>
