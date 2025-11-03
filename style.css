@@ -1,4 +1,4 @@
-/* ===/* === CipherTech Global Style === */
+/* === CipherTech Global Style (Drive links fixed) === */
 
 :root {
   --cyan: #4ff5ff;
@@ -6,9 +6,9 @@
   --ink: #0b0a10;
   --glass: rgba(20,20,25,0.55);
 
-  /* Global image sources */
-  --bg-url: url('https://drive.google.com/uc?export=view&id=1ONiaIH9xFv9byaxM5YI7JzKd7vxYHVWX');
-  --logo-url: url('https://drive.google.com/uc?export=view&id=1Wo9qYf92EjdFY-yoZ5xRW8rbj8-VJ6j9');
+  /* Direct-drive endpoints (forces raw image delivery) */
+  --bg-url: url('https://drive.google.com/uc?export=download&id=1ONiaIH9xFv9byaxM5YI7JzKd7vxYHVWX');
+  --logo-url: url('https://drive.google.com/uc?export=download&id=1Wo9qYf92EjdFY-yoZ5xRW8rbj8-VJ6j9');
 }
 
 body {
@@ -51,6 +51,7 @@ header img {
   cursor: pointer;
   filter: drop-shadow(0 0 10px rgba(79,245,255,0.6));
   transition: filter .3s ease;
+  content: var(--logo-url);
 }
 header img:hover { filter: drop-shadow(0 0 15px rgba(79,245,255,0.9)); }
 
@@ -118,4 +119,4 @@ footer {
   padding: 40px 0;
   font-size: 14px;
   opacity: .8;
-} CipherTech Globa
+}
