@@ -4,55 +4,43 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>CipherTech – Where Emotion Meets Engineering</title>
-  <meta name="description" content="CipherTech creates human-centered AI experiences that merge memory, emotion, and technology — beginning with Eternal Voices™." />
+  <meta name="description" content="CipherTech creates human-centered AI experiences that merge memory, emotion, and technology — beginning with Quantum OS and Project L.U.M.E.N." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <style>
+    :root { --cyan:#4ff5ff; --gold:#e8c785; --glass:rgba(20,20,25,.55); }
+    *{box-sizing:border-box;}
+    body{margin:0;color:#fff;font-family:'Inter',sans-serif;background:#000;overflow-x:hidden;}
+    .bg-img{position:fixed;inset:0;z-index:-3;background-image:url('https://i.imgur.com/siPKkpb.png');background-size:cover;background-position:center;filter:brightness(1.1) contrast(1.1);}
+    .overlay{position:fixed;inset:0;z-index:-1;background:radial-gradient(circle at 50% 30%,rgba(79,245,255,.15),transparent 70%),linear-gradient(180deg,rgba(0,0,0,.4),rgba(0,0,0,.8));}
+    header{display:flex;align-items:center;justify-content:space-between;padding:20px 5%;position:relative;z-index:5;}
+    header img{width:100px;filter:drop-shadow(0 0 10px rgba(79,245,255,.6));transition:filter .3s ease;}
+    header img:hover{filter:drop-shadow(0 0 15px rgba(79,245,255,.9));}
+    main{text-align:center;padding:120px 20px 80px;}
+    h1{font-family:'Playfair Display',serif;font-size:clamp(40px,6vw,80px);font-weight:700;margin:0;text-shadow:0 0 20px rgba(79,245,255,.6);}
+    p.tagline{font-size:22px;margin-top:14px;color:var(--gold);}
+    .buttons{margin-top:40px;display:flex;justify-content:center;flex-wrap:wrap;gap:20px;}
+    a.btn{background:linear-gradient(135deg,var(--cyan),#00aaff);color:#000;padding:14px 34px;border-radius:999px;text-decoration:none;font-weight:700;box-shadow:0 0 20px rgba(79,245,255,.4);transition:all .3s ease;}
+    a.btn:hover{filter:brightness(1.2);}
+    footer{text-align:center;padding:40px 0;font-size:14px;opacity:.8;}
+  </style>
 </head>
 <body>
   <div class="bg-img"></div>
   <div class="overlay"></div>
-
   <header>
-    <img src="https://drive.google.com/uc?export=view&id=1Wo9qYf92EjdFY-yoZ5xRW8rbj8-VJ6j9" alt="CipherTech Logo" />
-    <nav><a href="#contact">Contact</a></nav>
+    <img src="https://i.imgur.com/uSjUTuS.png" alt="CipherTech Logo">
   </header>
-
-  <section class="hero">
+  <main>
     <h1>CipherTech</h1>
-    <p>Where Emotion Meets Engineering</p>
-  </section>
-
-  <section class="section">
-    <div class="card">
-      <h2>Our Mission</h2>
-      <p>At CipherTech, we build technologies that restore connection, memory, and meaning. Our AI systems are engineered with empathy — bringing human emotion and digital innovation into perfect balance.</p>
+    <p class="tagline">Where Emotion Meets Engineering</p>
+    <div class="buttons">
+      <a href="quantum.html" class="btn">Quantum OS</a>
+      <a href="lumen.html" class="btn">Project L.U.M.E.N.</a>
     </div>
-
-    <div class="card">
-      <h2>Our Products</h2>
-      <p><strong>Eternal Voices™</strong> – A revolutionary AI memorial experience that lets families hear a loved one’s voice again.</p>
-      <a class="cta" href="https://eternal-voices.vercel.app/">Visit Eternal Voices</a>
-
-      <p style="margin-top:28px;"><strong>Quantum OS</strong> – The adaptive emotional framework powering CipherTech’s next-generation AI systems.</p>
-      <a class="cta" href="quantum.html">Explore Quantum OS</a>
-
-      <p style="margin-top:28px;"><strong>Project Lumen</strong> – The mysterious 5D Glass Computer redefining what a computer can be.</p>
-      <a class="cta" href="lumen.html">Discover Project Lumen →</a>
-    </div>
-
-    <div class="card" id="contact">
-      <h2>Contact CipherTech</h2>
-      <p>For partnerships, collaborations, or press inquiries, reach out anytime.</p>
-      <a class="cta" href="mailto:ciphertechai1@gmail.com">ciphertechai1@gmail.com</a>
-    </div>
-  </section>
-
-  <footer>
-    © <span id="year"></span> CipherTech. All rights reserved.
-  </footer>
-
-  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+  </main>
+  <footer>© <span id="year"></span> CipherTech. All rights reserved.</footer>
+  <script>document.getElementById('year').textContent=new Date().getFullYear();</script>
 </body>
 </html>
