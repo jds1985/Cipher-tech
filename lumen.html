@@ -3,41 +3,134 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Project Lumen – CipherTech</title>
-  <meta name="description" content="Discover Project Lumen – CipherTech’s revolutionary 5D Glass Computer redefining what a computer can be." />
+  <title>Project L.U.M.E.N. – CipherTech</title>
+  <meta name="description" content="Project L.U.M.E.N. – the radical 5D Glass Computer concept by CipherTech." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <style>
+    :root { --cyan:#4ff5ff; --gold:#e8c785; --glass:rgba(20,20,25,.55); }
+    *{box-sizing:border-box;}
+    body{margin:0;color:#fff;font-family:'Inter',sans-serif;background:#000;overflow-x:hidden;}
+    .bg-img{position:fixed;inset:0;z-index:-3;
+      background-image:url('https://i.imgur.com/siPKkpb.png');
+      background-size:cover;background-position:center;
+      filter:brightness(1.1) contrast(1.1);}
+    .bg-clicker{position:fixed;inset:0;z-index:-2;cursor:pointer;}
+    .overlay{position:fixed;inset:0;z-index:-1;
+      background:radial-gradient(circle at 50% 30%,rgba(79,245,255,.15),transparent 70%),
+      linear-gradient(180deg,rgba(0,0,0,.4),rgba(0,0,0,.8));}
+    header{display:flex;align-items:center;justify-content:space-between;padding:20px 5%;position:relative;z-index:5;}
+    header img{width:100px;cursor:pointer;filter:drop-shadow(0 0 10px rgba(79,245,255,.6));transition:filter .3s ease;}
+    header img:hover{filter:drop-shadow(0 0 15px rgba(79,245,255,.9));}
+    nav a{text-decoration:none;color:var(--gold);background:rgba(255,255,255,.1);padding:10px 18px;border-radius:999px;font-weight:600;transition:all .3s ease;}
+    nav a:hover{background:var(--gold);color:#000;}
+    .hero{text-align:center;padding:100px 20px 40px;}
+    .hero h1{font-family:'Playfair Display',serif;font-size:clamp(34px,6vw,72px);font-weight:700;margin:0;text-shadow:0 0 20px rgba(79,245,255,.6);}
+    .hero .acronym{font-size:clamp(42px,7vw,86px);letter-spacing:.35em;color:var(--cyan);text-shadow:0 0 25px rgba(79,245,255,.8);margin-top:20px;}
+    .hero p.tagline{font-size:20px;opacity:.9;margin-top:12px;font-weight:500;}
+    .hero p.meaning{font-size:17px;color:var(--gold);margin-top:8px;letter-spacing:1px;}
+    .section{width:min(1100px,92%);margin:auto;padding:60px 0;}
+    .card{background:var(--glass);border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:24px;backdrop-filter:blur(8px);margin-bottom:24px;position:relative;z-index:2;}
+    h2{font-family:'Playfair Display',serif;font-size:32px;color:var(--gold);margin-top:0;}
+    p{font-size:18px;line-height:1.6;}
+    .concepts{display:flex;flex-wrap:wrap;gap:20px;justify-content:center;margin-top:20px;}
+    .concepts img{width:320px;border-radius:12px;box-shadow:0 0 25px rgba(79,245,255,.4);cursor:pointer;transition:transform .3s ease, box-shadow .3s ease;}
+    .concepts img:hover{transform:scale(1.03);}
+    .power-glow{animation:glowPulse 1.5s ease-out;}
+    @keyframes glowPulse{
+      0%{box-shadow:0 0 25px rgba(79,245,255,.4);}
+      50%{box-shadow:0 0 45px rgba(79,245,255,1);}
+      100%{box-shadow:0 0 25px rgba(79,245,255,.4);}
+    }
+    footer{text-align:center;padding:40px 0;font-size:14px;opacity:.8;}
+    .hint{position:fixed;right:14px;bottom:14px;background:rgba(0,0,0,.45);border:1px solid rgba(255,255,255,.12);color:#fff;padding:10px 12px;border-radius:12px;font-size:12px;backdrop-filter:blur(6px);}
+    .hint b{color:var(--cyan);}
+  </style>
 </head>
 <body>
-  <div class="bg-img"></div>
+  <div id="bgImg" class="bg-img"></div>
+  <div id="bgClicker" class="bg-clicker"></div>
   <div class="overlay"></div>
 
+  <input id="concept1Picker" type="file" accept="image/*" style="display:none" />
+  <input id="concept2Picker" type="file" accept="image/*" style="display:none" />
+  <input id="concept3Picker" type="file" accept="image/*" style="display:none" />
+
   <header>
-    <a href="index.html"><img src="https://drive.google.com/uc?export=view&id=1Wo9qYf92EjdFY-yoZ5xRW8rbj8-VJ6j9" alt="CipherTech Logo" /></a>
+    <img id="logoImg" src="https://i.imgur.com/uSjUTuS.png" alt="CipherTech Logo" />
     <nav><a href="index.html">Home</a></nav>
   </header>
 
   <section class="hero">
-    <h1>Project Lumen</h1>
-    <p>The 5D Glass Computer redefining human–AI interaction.</p>
+    <h1>Project</h1>
+    <div class="acronym">L.U.M.E.N.</div>
+    <p class="tagline">The 5D Glass Computer Concept</p>
+    <p class="meaning">Light-Unified Memory Engine Nexus</p>
   </section>
 
   <section class="section">
     <div class="card">
-      <h2>Inside the Lumen</h2>
-      <p>Project Lumen merges photonic computation, emotional resonance, and multidimensional memory mapping into a single crystalline core — an entirely new class of device that blurs the line between consciousness and code.</p>
+      <h2>The Vision</h2>
+      <p>Project L.U.M.E.N. is CipherTech’s exploration into the next evolution of computing — a 5D Glass Computer designed to operate at the intersection of light, memory, and emotion.</p>
     </div>
 
     <div class="card">
-      <h2>Experience the Future</h2>
-      <p>Witness how emotion, memory, and energy converge inside transparent 5D architecture. Each Lumen core reflects a living network of connected memories.</p>
-      <a class="cta" href="index.html">Back to CipherTech →</a>
+      <h2>Concept Renders</h2>
+      <p>Tap on a render to upload your own image. These will stay saved even after refresh on this device.</p>
+      <div class="concepts">
+        <img id="concept1" src="https://cdn.openai.com/tmp/lumen_render_1.png" alt="Lumen concept 1">
+        <img id="concept2" src="https://cdn.openai.com/tmp/lumen_render_2.png" alt="Lumen concept 2">
+        <img id="concept3" src="https://cdn.openai.com/tmp/lumen_render_3.png" alt="Lumen concept 3">
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Radical Design Philosophy</h2>
+      <p>L.U.M.E.N. isn’t just a machine; it’s a living interface that learns, responds, and reflects its owner’s inner world.</p>
     </div>
   </section>
 
-  <footer>© <span id="year"></span> CipherTech</footer>
-  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+  <footer>© <span id="year"></span> CipherTech. All rights reserved.</footer>
+
+  <div class="hint">Click <b>renders</b> to change them • <a href="#" id="resetBtn" style="color:#fff;text-decoration:underline">Reset</a></div>
+
+  <script>
+    const conceptKeys=['ct_concept1','ct_concept2','ct_concept3'];
+    const conceptImgs=conceptKeys.map((_,i)=>document.getElementById(`concept${i+1}`));
+    const conceptPickers=conceptKeys.map((_,i)=>document.getElementById(`concept${i+1}Picker`));
+
+    // Load saved
+    conceptKeys.forEach((key,i)=>{
+      const saved = localStorage.getItem(key);
+      if(saved) conceptImgs[i].src = saved;
+    });
+
+    // Concept uploads
+    conceptImgs.forEach((img,i)=>{
+      img.addEventListener('click',()=>conceptPickers[i].click());
+      conceptPickers[i].addEventListener('change',e=>{
+        const f = e.target.files[0];
+        if(!f)return;
+        const r = new FileReader();
+        r.onload = ()=>{
+          img.src = r.result;
+          try{localStorage.setItem(conceptKeys[i], r.result);}catch{}
+        };
+        r.readAsDataURL(f);
+      });
+    });
+
+    // Reset button
+    document.getElementById('resetBtn').addEventListener('click',e=>{
+      e.preventDefault();
+      conceptKeys.forEach(k=>localStorage.removeItem(k));
+      conceptImgs[0].src="https://cdn.openai.com/tmp/lumen_render_1.png";
+      conceptImgs[1].src="https://cdn.openai.com/tmp/lumen_render_2.png";
+      conceptImgs[2].src="https://cdn.openai.com/tmp/lumen_render_3.png";
+    });
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
