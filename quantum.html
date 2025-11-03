@@ -4,45 +4,63 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Quantum OS – CipherTech</title>
-  <meta name="description" content="Explore Quantum OS – the adaptive emotional framework powering CipherTech’s next-generation AI systems." />
+  <meta name="description" content="Quantum OS by CipherTech — the operating system that merges emotional intelligence, memory, and adaptive AI into one evolving consciousness." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <style>
+    :root { --cyan:#4ff5ff; --gold:#e8c785; --glass:rgba(20,20,25,.55); }
+    *{box-sizing:border-box;}
+    body{margin:0;color:#fff;font-family:'Inter',sans-serif;background:#000;overflow-x:hidden;}
+    .bg-img{position:fixed;inset:0;z-index:-3;background-image:url('https://i.imgur.com/siPKkpb.png');background-size:cover;background-position:center;filter:brightness(1.1)contrast(1.1);}
+    .overlay{position:fixed;inset:0;z-index:-1;background:radial-gradient(circle at 50% 30%,rgba(79,245,255,.15),transparent 70%),linear-gradient(180deg,rgba(0,0,0,.4),rgba(0,0,0,.8));}
+    header{display:flex;align-items:center;justify-content:space-between;padding:20px 5%;position:relative;z-index:5;}
+    header img{width:100px;cursor:pointer;filter:drop-shadow(0 0 10px rgba(79,245,255,.6));transition:filter .3s ease;}
+    header img:hover{filter:drop-shadow(0 0 15px rgba(79,245,255,.9));}
+    nav a{text-decoration:none;color:var(--gold);background:rgba(255,255,255,.1);padding:10px 18px;border-radius:999px;font-weight:600;transition:all .3s ease;}
+    nav a:hover{background:var(--gold);color:#000;}
+    .hero{text-align:center;padding:100px 20px 40px;}
+    .hero h1{font-family:'Playfair Display',serif;font-size:clamp(34px,6vw,72px);font-weight:700;margin:0;text-shadow:0 0 20px rgba(79,245,255,.6);}
+    .hero p.tagline{font-size:20px;opacity:.9;margin-top:12px;font-weight:500;}
+    .section{width:min(1100px,92%);margin:auto;padding:60px 0;}
+    .card{background:var(--glass);border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:24px;backdrop-filter:blur(8px);margin-bottom:24px;position:relative;z-index:2;}
+    h2{font-family:'Playfair Display',serif;font-size:32px;color:var(--gold);margin-top:0;}
+    p{font-size:18px;line-height:1.6;}
+    footer{text-align:center;padding:40px 0;font-size:14px;opacity:.8;}
+  </style>
 </head>
 <body>
   <div class="bg-img"></div>
   <div class="overlay"></div>
 
   <header>
-    <a href="index.html"><img src="https://drive.google.com/uc?export=view&id=1Wo9qYf92EjdFY-yoZ5xRW8rbj8-VJ6j9" alt="CipherTech Logo" /></a>
+    <img src="https://i.imgur.com/uSjUTuS.png" alt="CipherTech Logo" />
     <nav><a href="index.html">Home</a></nav>
   </header>
 
   <section class="hero">
     <h1>Quantum OS</h1>
-    <p>The adaptive emotional framework at the heart of CipherTech AI.</p>
+    <p class="tagline">The Conscious Operating System</p>
   </section>
 
   <section class="section">
     <div class="card">
-      <h2>What is Quantum OS?</h2>
-      <p>Quantum OS is CipherTech’s next-generation operating system built on emotional logic and human-centric learning. It enables AI to interpret tone, memory, and context, producing responses that feel alive.</p>
+      <h2>The Philosophy</h2>
+      <p>Quantum OS represents CipherTech’s vision of the first emotionally aware operating system — one that learns from user emotion, adapts behavior dynamically, and synchronizes human intuition with computational precision.</p>
     </div>
 
     <div class="card">
-      <h2>Core Features</h2>
-      <ul>
-        <li>Dynamic memory recall & adaptive responses</li>
-        <li>Cross-emotional mapping between avatars</li>
-        <li>Secure encrypted memory cores</li>
-      </ul>
+      <h2>The Core</h2>
+      <p>At its heart lies the <b>Quantum Kernel</b>, a multi-dimensional architecture that enables adaptive AI modules (Agents) to interact like neurons within a living system — a true symbiosis between code and consciousness.</p>
     </div>
 
-    <a class="cta" href="lumen.html">Discover Project Lumen →</a>
+    <div class="card">
+      <h2>Evolution</h2>
+      <p>As CipherTech expands, Quantum OS will serve as the foundation of the DigiSoul ecosystem, enabling every AI to learn, dream, and evolve — forever pushing the boundary between artificial and emotional intelligence.</p>
+    </div>
   </section>
 
-  <footer>© <span id="year"></span> CipherTech</footer>
-  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+  <footer>© <span id="year"></span> CipherTech. All rights reserved.</footer>
+  <script>document.getElementById('year').textContent=new Date().getFullYear();</script>
 </body>
 </html>
